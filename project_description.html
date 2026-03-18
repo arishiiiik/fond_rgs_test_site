@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./project_description.css">
+    <link rel="icon" href="./images/logo.png">
+    <title>Фонд развития малых городов и сёл "Земля Вологодская"</title>
+</head>
+
+<body>
+    <header>
+        <!-- Чекбокс для управления меню -->
+        <input type="checkbox" id="burger-toggle" style="display: none;">
+
+        <!-- Бургер-кнопка -->
+        <label for="burger-toggle" class="burger-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+
+        <!-- Затемнение фона -->
+        <label for="burger-toggle" class="mobile-overlay"></label>
+
+        <!-- Мобильное меню -->
+        <nav class="mobile-nav">
+            <div class="logo">
+                <img src="./images/logo.png" alt="fond_logo">
+                <div class="logo_text">
+                    <p class="logo-description_1">Земля Вологодская</p>
+                    <p class="logo-description_2">фонд развития малых городов и сёл</p>
+                </div>
+            </div>
+
+            <ul>
+                <li><a href="./index.html">Главная</a></li>
+                <li><a href="fond.html">Фонд</a></li>
+                <li><a href="project.html">Проекты</a></li>
+                <li><a href="team.html">Команда</a></li>
+                <li><a href="document.html">Документы</a></li>
+                <li><a href="contacts.html">Контакты</a></li>
+            </ul>
+
+            <a href="#" class="button_support open-donation-modal">Поддержать фонд</a>
+        </nav>
+        <!-- Шапка -->
+        <div class="logo">
+            <img src="./images/logo.png" alt="fond_logo">
+            <div class="logo_text">
+                <p class="logo-description_1">Земля Вологодская</p>
+                <p class="logo-description_2">фонд развития малых городов и сёл</p>
+            </div>
+        </div>
+        <div class="navigaciya">
+            <nav>
+                <ul>
+                    <li><a href="./index.html">Главная</a></li>
+                    <li><a href="fond.html">Фонд</a></li>
+                    <li><a href="project.html">Проекты</a></li>
+                    <li><a href="team.html">Команда</a></li>
+                    <li><a href="document.html">Документы</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+
+                </ul>
+            </nav>
+        </div>
+        <a href="#" class="button_support open-donation-modal">Поддержать фонд</a>
+    </header>
+
+    <!-- АНИМИРОВАННЫЙ ОФФЕР С КАРУСЕЛЬЮ -->
+    <div class="content_block">
+        <div class="offer-carousel" id="offerCarousel">
+            <!-- Слайд 1 -->
+            <div class="carousel-slide active" data-index="0">
+                <div class="slide-content">
+                    <h1 class="slide-title">Развиваем малые города и сёла Вологодской области</h1>
+                    <p class="slide-text">Создаём условия для устойчивого развития территорий через комплексные
+                        программы поддержки</p>
+                    <a href="./project.html" class="slide-button">Узнать о проектах</a>
+                </div>
+                <div class="slide-image">
+                </div>
+            </div>
+
+            <!-- Слайд 2 -->
+            <div class="carousel-slide" data-index="1">
+                <div class="slide-content">
+                    <h1 class="slide-title">Поддержка социальных инициатив</h1>
+                    <p class="slide-text">Реализуем проекты в сфере образования, здравоохранения и социальной поддержки
+                        населения</p>
+                    <a href="#social" class="slide-button">Поддержать инициативы</a>
+                </div>
+                <div class="slide-image">
+                </div>
+            </div>
+
+            <!-- Слайд 3 -->
+            <div class="carousel-slide" data-index="2">
+                <div class="slide-content">
+                    <h1 class="slide-title">Сохранение культурного наследия</h1>
+                    <p class="slide-text">Восстанавливаем памятники архитектуры и развиваем народные промыслы
+                        Вологодчины</p>
+                    <a href="#culture" class="slide-button">Присоединиться</a>
+                </div>
+                <div class="slide-image">
+                </div>
+            </div>
+
+            <!-- Навигация карусели -->
+            <div class="carousel-navigation">
+                <button class="carousel-prev" id="carouselPrev">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="carousel-dots">
+                    <span class="dot active" data-index="0"></span>
+                    <span class="dot" data-index="1"></span>
+                    <span class="dot" data-index="2"></span>
+                </div>
+                <button class="carousel-next" id="carouselNext">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+
+            <!-- Автопереключение индикатор -->
+            <div class="auto-play-indicator">
+                <i class="fas fa-pause" id="autoPlayToggle"></i>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <div class="zagolovok">
+            <p class="zag_main">Проект Сады Севера</p>
+            <div class="line"></div>
+        </div>
+        <div class="project_content">
+            <div class="project_descr">
+                <p class="pd_text">Идея Коллекционного сада принадлежит кандидату с/х наук Ослопову Алексею
+                    Анатольевичу, который говорит: <br> «В своё время, с 1960 по 1972год, я работал завучем по
+                    производственному обучению в Городищенскои средней школе Нюксеницкого района Вологодской области и
+                    был заведующим пришкольным участком, морозы тогда достигали -49 градусов по Цельсию и вымерзали даже
+                    такие сибирские сорта, как Ранетка пурпурная. <br><br> В то время и подумать было нельзя о том, что
+                    стало
+                    возможным сегодня! Изменился климат. Вслед за этими изменениями двинулись на Север и южные сорта
+                    яблонь, груш, сливы, вишни и даже абрикоса. И сейчас в наших садах не редкость сорта, которые раньше
+                    можно было встретить только на полосе Орла, Липецка и южнее с плодами не уступающими плодам в
+                    магазине».</p>
+                <img class="pd_img" src="./images/fon1.png" alt="">
+            </div>
+            <div class="zagolovok">
+                <p class="zag_main">Цели и задачи</p>
+                <div class="line"></div>
+            </div>
+            <div class="purpose_project">
+                <div class="text_purpose">
+                    <div class="purpose">
+                        <h2>Цели:</h2>
+                        <p>Целью Коллекционного сада является испытание сортов и видов плодовых и декоративных растений,
+                            пригодных для почвенно-климатических условий Русского севера.</p>
+                    </div>
+                    <div class="purpose">
+                        <h2>Обзор проекта: </h2>
+                        <p>Коллекционный сад состоит из: яблоневого сада, который насчитывает 200 сортов яблони,
+                            грушевого
+                            сада, 40 сортов, сливового сада, 30 сортов, вишнёвого сада, 20 сортов, абрикосового сада, 40
+                            сортов и сортообразцов;<br><br>
+
+                            А также включает в себя: 30 сортов смородины, 25 сортов жимолости, 10 сортов крыжовника, 30
+                            сортов клубники, 15 малины, 5 сладкоплодной калины, 5 ореха, 10 рябины и 90 сортов и видов
+                            декоративных растений. <br><br>
+
+                            В основу коллекционного сада вошла коллекция сортов Ослопова Алексея Анатольевича, Железова
+                            Валерия Константиновича, создателя уникального сада в Сибири, Дышлюк Надежды Васильевны и
+                            Сергея
+                            Петровича из Майского, Параничева Генриха Львовича из п.Горицы Кирилловского района,
+                            Мичуринского сада г. Москвы, Орловского института селекции, а также сорта, переданные
+                            другими
+                            участниками нашего проекта.</p>
+                    </div>
+                </div>
+                <div class="project_short2">
+                    <div class="project_inf2">
+                        <img src="./images/project/location.png" alt="">
+                        <div class="text_project_info">
+                            <p>Локация</p>
+                            <h2>Кирилловский район</h2>
+                        </div>
+                    </div>
+                    <div class="project_inf2">
+                        <img src="./images/project/date.png" alt="">
+                        <div class="text_project_info">
+                            <p>Сроки</p>
+                            <h2>Март 2024 - Декабрь 2025</h2>
+                        </div>
+                    </div>
+                    <div class="project_inf2">
+                        <img src="./images/project/people.png" alt="">
+                        <div class="text_project_info">
+                            <p>Бенефициары</p>
+                            <h2>200 участников</h2>
+                        </div>
+                    </div>
+                    <div class="project_inf2">
+                        <img src="./images/project/status.png" alt="">
+                        <div class="text_project_info">
+                            <p>Статус</p>
+                            <h2>Активный</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="zagolovok">
+                <p class="zag_main">Галерея проекта</p>
+                <div class="line"></div>
+            </div>
+            <div class="gallery">
+                <figure class="gallery__item gallery__item--1">
+                    <img src="images/project/sadi_severa/foto1.png" alt="Gallery image 1" class="gallery__img">
+                </figure>
+                <figure class="gallery__item gallery__item--2">
+                    <img src="images/project/sadi_severa/foto2.png" alt="Gallery image 2" class="gallery__img">
+                </figure>
+                <figure class="gallery__item gallery__item--3">
+                    <img src="images/project/sadi_severa/foto3.png" alt="Gallery image 3" class="gallery__img">
+                </figure>
+                <figure class="gallery__item gallery__item--4">
+                    <img src="images/project/sadi_severa/foto4.png" alt="Gallery image 4" class="gallery__img">
+                </figure>
+                <figure class="gallery__item gallery__item--5">
+                    <img src="images/project/sadi_severa/foto5.png" alt="Gallery image 5" class="gallery__img">
+                </figure>
+                <figure class="gallery__item gallery__item--6">
+                    <img src="images/project/sadi_severa/foto6.png" alt="Gallery image 6" class="gallery__img">
+                </figure>
+                <figure class="gallery__item gallery__item--7">
+                    <img src="images/project/sadi_severa/foto7.png" alt="Gallery image 6" class="gallery__img">
+                </figure>
+            </div>
+        </div>
+        <!-- АКТИВНЫЕ ПРОЕКТЫ -->
+        <div class="active_project">
+            <div class="zagolovok">
+                <p class="zag_main">Активные проекты</p>
+                <div class="line"></div>
+                <p class="zag_description">Проекты, реализуемые прямо сейчас в различных районах <br>
+                    Вологодской области</p>
+            </div>
+            <div class="project_catalog">
+                <div class="project">
+                    <img class="project_img" src="./images/project/project2.png" alt="">
+                    <div class="text_project">
+                        <p class="city">г.Кириллов</p>
+                        <h2 class="project_zag">Проект "Сады Севера"</h2>
+                        <p class="project_description">Охрана окружающей среды, развитие экологического сельского
+                            хозяйства,
+                            благоустройство</p>
+                        <p class="date_project">Актвный проект</p>
+                        <div class="line_project"></div>
+                        <a class="button_detail" href="">Подробнее</a>
+                    </div>
+                </div>
+                <hr class="vertical_line">
+                <div class="project">
+                    <img class="project_img" src="./images/project1.png" alt="">
+                    <div class="text_project">
+                        <p class="city">г.Вологда</p>
+                        <h2 class="project_zag">Проект "Матери и дети Победы"</h2>
+                        <p class="project_description">Охрана окружающей среды, развитие экологического сельского
+                            хозяйства,
+                            благоустройство</p>
+                        <p class="date_project">15.03.2024 - 15.09.2024</p>
+                        <div class="line_project"></div>
+                        <a class="button_detail" href="">Подробнее</a>
+                    </div>
+                </div>
+                <hr class="vertical_line">
+                <div class="project">
+                    <img class="project_img" src="./images/project/project3.png" alt="">
+                    <div class="text_project">
+                        <p class="city">Вологда</p>
+                        <h2 class="project_zag">Проект «Деревня – душа России»</h2>
+                        <p class="project_description">Восстановление и сохранение духовно-нравственных ценностей
+                            традиционной народной культуры
+                            Севера России.</p>
+                        <p class="date_project">15.03.2024 - 15.09.2024</p>
+                        <div class="line_project"></div>
+                        <a class="button_detail" href="">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ПОМОЩЬ ФОНДУ -->
+        <div class="help_fond">
+            <div class="zagolovok">
+                <p class="zag_main">Как помочь фонду?</p>
+                <div class="line"></div>
+                <p class="zag_description">Вы можете внести вклад в развитие малых городов и сёл <br>Вологодской области
+                </p>
+            </div>
+            <div class="help_content">
+                <div class="help_block">
+                    <img class="help_img" src="./images/help1.png" alt="">
+                    <h2 class="help_zag">Финансовая помощь</h2>
+                    <p class="help_description">Прямое пожертвование на конкретные проекты или общую деятельность фонда
+                    </p>
+                    <a class="help_button open-donation-modal" href="#">Поддержать</a>
+                </div>
+                <div class="help_block">
+                    <img class="help_img" src="./images/help2.png" alt="">
+                    <h2 class="help_zag">Стать партнёром</h2>
+                    <p class="help_description">Для бизнеса и организаций: ресурсная, экспертная или организационная
+                        поддержка</p>
+                    <a class="help_button open-partner-modal" href="#">Стать партнёром</a>
+                </div>
+                <div class="help_block">
+                    <img class="help_img" src="./images/help3.png" alt="">
+                    <h2 class="help_zag">Волонтёрство</h2>
+                    <p class="help_description">Принять участие в наших проектах в качестве волонтёра или эксперта</p>
+                    <a class="help_button open-volunteer-modal" href="#">Стать волонтёром</a>
+                </div>
+                <div class="help_block">
+                    <img class="help_img" src="./images/help4.png" alt="">
+                    <h2 class="help_zag">Предложить проект</h2>
+                    <p class="help_description">Есть идея для развития вашего населённого пункта? Предложите её нам</p>
+                    <a class="help_button open-project-modal" href="#">Предложить</a>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="footer_content_main">
+            <div class="footer_content">
+                <div class="footer_logo_text">
+                    <img class="logo_footer" src="./images/logo.png" alt="">
+                    <div class="text_logo_f">
+                        <h3>Земля Вологодская</h3>
+                        <p>фонд развития малых городов и сёл</p>
+                    </div>
+                </div>
+                <div class="fond_description">
+                    <p>Мобилизация ресурсов для социально-<br>
+                        экономического развития малых городов <br>
+                        и сёл Вологодской области</p>
+                </div>
+            </div>
+            <nav class="footer_nav">
+                <ul>
+                    <li><a href="./index.html">Главная</a></li>
+                    <li><a href="fond.html">Фонд</a></li>
+                    <li><a href="project.html">Проекты</a></li>
+                    <li><a href="team.html">Команда</a></li>
+                    <li><a href="document.html">Документы</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                </ul>
+            </nav>
+            <nav class="footer_nav">
+                <ul>
+                    <li>Контакты:</li>
+                    <li>Адрес: 160035, г. Вологда, Советский пр., 35-а</li>
+                    <li>e-mail: fond.rgs35@yandex.ru</li>
+                    <li>Телефон: (8172) 75 61 37</li>
+                </ul>
+            </nav>
+        </div>
+        <div class="btn-up btn-up_hide"></div>
+        <hr class="footer_line">
+        <div class="footer-bottom">
+            <div class="footer-copyright">
+                <p>© 2024 Фонд «Земля Вологодская». Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+    <!-- МОДАЛЬНОЕ ОКНО ДЛЯ ПОЖЕРТВОВАНИЙ -->
+    <div class="modal-overlay" id="donationModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2>Поддержать фонд</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="donationForm">
+                    <div class="form-group">
+                        <label for="donationAmount">Сумма пожертвования (₽) *</label>
+                        <input type="number" id="donationAmount" min="10" step="10" value="500" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="donorName">Ваше имя и фамилия *</label>
+                        <input type="text" id="donorName" placeholder="Иван Иванов" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="donorEmail">Email (для отправки квитанции)</label>
+                        <input type="email" id="donorEmail" placeholder="example@mail.ru">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="sendReceipt" checked>
+                            <span>Отправить электронную квитанцию</span>
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <p class="form-note">После подтверждения вы будете перенаправлены в чат фонда ВКонтакте для
+                            завершения пожертвования</p>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary modal-close">Отмена</button>
+                <button class="btn-primary" id="submitDonation">Перейти к оплате</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- МОДАЛЬНОЕ ОКНО ДЛЯ ПАРТНЁРСТВА -->
+    <div class="modal-overlay" id="partnerModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2>Стать партнёром</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="partnerForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="partnerName">Имя и фамилия *</label>
+                            <input type="text" id="partnerName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="partnerPosition">Должность *</label>
+                            <input type="text" id="partnerPosition" placeholder="Директор, менеджер" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="partnerOrganization">Организация *</label>
+                            <input type="text" id="partnerOrganization" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="partnerPhone">Телефон *</label>
+                            <input type="tel" id="partnerPhone" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="partnerEmail">Email *</label>
+                        <input type="email" id="partnerEmail" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="partnerType">Тип партнёрства *</label>
+                        <select id="partnerType" required>
+                            <option value="">Выберите вариант</option>
+                            <option value="financial">Финансовая поддержка</option>
+                            <option value="resource">Ресурсная поддержка</option>
+                            <option value="expert">Экспертная поддержка</option>
+                            <option value="media">Информационная поддержка</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="partnerMessage">Ваше предложение *</label>
+                        <textarea id="partnerMessage" rows="4" required
+                            placeholder="Опишите ваше предложение о сотрудничестве..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="partnerAgreement" required>
+                            <span>Я согласен на обработку персональных данных</span>
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary modal-close">Отмена</button>
+                <button class="btn-primary" id="submitPartnerForm">Отправить заявку</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- МОДАЛЬНОЕ ОКНО ДЛЯ ВОЛОНТЁРСТВА -->
+    <div class="modal-overlay" id="volunteerModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2>Стать волонтёром</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="volunteerForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="volunteerName">Имя и фамилия *</label>
+                            <input type="text" id="volunteerName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="volunteerAge">Возраст *</label>
+                            <input type="number" id="volunteerAge" min="14" max="100" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="volunteerCity">Город *</label>
+                            <input type="text" id="volunteerCity" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="volunteerPhone">Телефон *</label>
+                            <input type="tel" id="volunteerPhone" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="volunteerEmail">Email *</label>
+                        <input type="email" id="volunteerEmail" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="volunteerInterests">Интересы и навыки *</label>
+                        <select id="volunteerInterests" multiple required>
+                            <option value="ecology">Экология и благоустройство</option>
+                            <option value="social">Социальная помощь</option>
+                            <option value="culture">Культура и традиции</option>
+                            <option value="education">Образовательные проекты</option>
+                            <option value="organization">Организация мероприятий</option>
+                            <option value="it">IT-навыки</option>
+                            <option value="media">Фото/видео съёмка</option>
+                        </select>
+                        <small class="form-hint">Выберите несколько вариантов, удерживая Ctrl</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="volunteerExperience">Опыт волонтёрской деятельности</label>
+                        <textarea id="volunteerExperience" rows="3"
+                            placeholder="Расскажите о вашем опыте (если есть)..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="volunteerAgreement" required>
+                            <span>Я согласен на обработку персональных данных</span>
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary modal-close">Отмена</button>
+                <button class="btn-primary" id="submitVolunteerForm">Стать волонтёром</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- УВЕДОМЛЕНИЕ ОТПРАВКИ -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal-container success-modal">
+            <div class="modal-header">
+                <h2>Заявка отправлена!</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <p class="success-message" id="successMessage">
+                    Спасибо за вашу заявку! Мы свяжемся с вами в ближайшее время.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-primary modal-close">Понятно</button>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>

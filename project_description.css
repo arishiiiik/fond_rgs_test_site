@@ -1,0 +1,785 @@
+.project_content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.project_descr {
+    width: 90%;
+    height: auto;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    padding: 2% 3%;
+    display: flex;
+    gap: 5%;
+    align-items: center;
+    margin-top: 2%;
+
+}
+
+.pd_text {
+    width: 50%;
+    font-family: 'Montserrat-Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 150%;
+    text-align: justify;
+    color: #000000;
+}
+
+.pd_img {
+    width: 50%;
+}
+
+
+/* Цели и обзор */
+.purpose_project {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 5%;
+    padding: 2%;
+}
+
+.purpose h2 {
+    font-family: 'Montserrat-Bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    text-align: justify;
+    color: #825B2C;
+    margin-bottom: 1%;
+}
+
+.purpose p {
+    font-family: 'Montserrat-Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    text-align: justify;
+    color: #000000;
+    margin-bottom: 2%;
+}
+
+.text_purpose {
+    width: 60%;
+    color: white;
+}
+
+.project_short2 {
+    width: 40%;
+    height: auto;
+    background: linear-gradient(90deg, #419037 0%, #92BA52 100%);
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    padding: 2% 3%;
+    display: flex;
+    flex-direction: column;
+    gap: 5%;
+    margin-top: 2%;
+    color: white;
+}
+
+.project_inf2 {
+    display: flex;
+    align-items: center;
+    gap: 2%;
+    margin-bottom: 5%;
+}
+
+/* --------------Галерея проекта------------- */
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 5vw);
+    grid-gap: 1.5rem;
+    margin-top: 2%;
+    margin-bottom: 3%;
+}
+
+.gallery__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.gallery__item--1 {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+
+.gallery__item--2 {
+    grid-column-start: 3;
+    grid-column-end: 5;
+    grid-row-start: 1;
+    grid-row-end: 3;
+
+}
+
+.gallery__item--3 {
+    grid-column-start: 5;
+    grid-column-end: 9;
+    grid-row-start: 1;
+    grid-row-end: 6;
+
+}
+
+.gallery__item--4 {
+    grid-column-start: 1;
+    grid-column-end: 5;
+    grid-row-start: 3;
+    grid-row-end: 6;
+
+}
+
+.gallery__item--5 {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 6;
+    grid-row-end: 9;
+}
+
+.gallery__item--6 {
+    grid-column-start: 4;
+    grid-column-end: 6;
+    grid-row-start: 6;
+    grid-row-end: 9;
+}
+.gallery__item--7 {
+    grid-column-start: 6;
+    grid-column-end: 9;
+    grid-row-start: 6;
+    grid-row-end: 9;
+}
+.gallery img {
+    border-radius: 20px;
+}
+
+footer {
+    margin-top: 2%;
+}
+/* =========================================== */
+/* АДАПТИВНОСТЬ СТРАНИЦЫ ПРОЕКТА */
+/* =========================================== */
+
+/* 1920px - 1600px: Большие мониторы */
+@media (max-width: 1920px) {
+    .project_descr,
+    .project_short,
+    .purpose_project {
+        width: 95%;
+    }
+    
+    .gallery {
+        grid-gap: 1.2rem;
+    }
+}
+
+/* 1600px - 1440px: Ноутбуки большие */
+@media (max-width: 1600px) {
+    .pd_text {
+        font-size: 19px;
+        line-height: 145%;
+    }
+    
+    .text_project_info h2 {
+        font-size: 21px;
+    }
+    
+    .text_project_info p {
+        font-size: 17px;
+    }
+    
+    .purpose h2 {
+        font-size: 23px;
+    }
+    
+    .purpose p {
+        font-size: 19px;
+    }
+    
+    .gallery {
+        grid-template-rows: repeat(8, 6vw);
+        grid-gap: 1rem;
+    }
+}
+
+/* 1440px - 1366px: Ноутбуки средние */
+@media (max-width: 1440px) {
+    .project_descr {
+        width: 98%;
+    }
+    
+    .pd_text {
+        font-size: 18px;
+        line-height: 140%;
+    }
+    
+    .text_project_info h2 {
+        font-size: 20px;
+    }
+    
+    .purpose h2 {
+        font-size: 22px;
+    }
+    
+    .purpose p {
+        font-size: 18px;
+    }
+    
+    .gallery {
+        grid-template-rows: repeat(8, 7vw);
+        grid-gap: 0.8rem;
+    }
+}
+
+/* 1366px - 1280px: Ноутбуки малые */
+@media (max-width: 1366px) {
+    .pd_text {
+        font-size: 17px;
+    }
+    
+    .text_project_info p {
+        font-size: 16px;
+    }
+    
+    
+    .project_short2 {
+        padding: 3% 3%;
+        color: white;
+    }
+    
+    .gallery {
+        grid-template-rows: repeat(8, 8vw);
+    }
+}
+
+/* 1280px - 1024px: Планшеты горизонтальные */
+@media (max-width: 1280px) {
+    .project_descr {
+        flex-direction: column;
+        gap: 30px;
+        padding: 3% 4%;
+        text-align: center;
+    }
+    
+    .pd_text,
+    .pd_img {
+        width: 100%;
+    }
+    
+    .pd_text {
+        font-size: 16px;
+        line-height: 135%;
+    }
+    
+    .project_inf {
+        width: 45%;
+        min-width: 300px;
+    }
+    
+    .text_project_info h2 {
+        font-size: 19px;
+    }
+    
+    .text_project_info p {
+        font-size: 15px;
+    }
+    
+    .purpose_project {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .text_purpose,
+    .project_short2 {
+        width: 100%;
+    }
+    
+    .purpose h2 {
+        font-size: 21px;
+        text-align: center;
+    }
+    
+    .purpose p {
+        font-size: 17px;
+        text-align: left;
+    }
+    
+    .project_short2 {
+        padding: 4% 5%;
+        color: white;
+    }
+    
+    .gallery {
+        grid-template-rows: repeat(8, 10vw);
+        grid-gap: 0.7rem;
+    }
+}
+
+/* 1024px - 992px: Планшеты */
+@media (max-width: 1024px) {
+    .project_content {
+        padding: 0 20px;
+    }
+    
+    .project_descr {
+        padding: 4% 5%;
+        margin-top: 3%;
+    }
+    
+    .project_inf {
+        width: 48%;
+        min-width: 280px;
+    }
+    
+    .pd_text {
+        font-size: 16px;
+        line-height: 130%;
+    }
+    
+    .purpose h2 {
+        font-size: 20px;
+    }
+    
+    .purpose p {
+        font-size: 16px;
+    }
+    
+    .gallery {
+        grid-template-rows: repeat(8, 12vw);
+        grid-gap: 0.6rem;
+        margin: 3% 0;
+    }
+}
+
+/* 992px - 768px: Планшеты вертикальные */
+@media (max-width: 992px) {
+    .project_descr {
+        padding: 5% 6%;
+        border-radius: 15px;
+    }
+    
+    .purpose_project {
+        padding: 3%;
+    }
+    
+    .purpose h2 {
+        font-size: 19px;
+    }
+    
+    .purpose p {
+        font-size: 15px;
+    }
+    
+    .project_short2 {
+        padding: 5% 6%;
+        border-radius: 15px;
+        color: white;
+    }
+    
+    .gallery {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin: 5% 0;
+    }
+    
+    .gallery img {
+        border-radius: 15px;
+    }
+}
+
+/* 768px - 576px: Мобильные горизонтальные */
+@media (max-width: 768px) {
+    header {
+        padding: 0;
+    }
+    .project_content {
+        padding: 0 15px;
+    }
+
+    .project_descr {
+        padding: 2% 2%;
+        margin-top: 4%;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
+        width: 85%;
+    }
+    
+    .pd_text {
+        font-size: 15px;
+        line-height: 125%;
+    }
+    .purpose_project {
+        gap: 25px;
+        padding: 4%;
+        width: 85%;
+    }
+    
+    .purpose h2 {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+    
+    .purpose p {
+        font-size: 14px;
+        margin-bottom: 15px;
+        line-height: 1.4;
+    }
+    
+    .project_short2 {
+        padding: 6% 7%;
+        margin-top: 4%;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
+        color: white;
+        width: 85%;
+    }
+    
+    .project_inf2 {
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+    
+    .project_inf2 img {
+        width: 24px;
+        height: 24px;
+    }
+    
+    /* Адаптивная галерея для мобильных */
+    .gallery {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin: 5% 0;
+    }
+    
+    .gallery__item {
+        width: 100%;
+        height: 250px;
+    }
+    
+    .gallery__img {
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    /* Убираем грид-расположение для мобильных */
+    .gallery__item--1,
+    .gallery__item--2,
+    .gallery__item--3,
+    .gallery__item--4,
+    .gallery__item--5,
+    .gallery__item--6,
+    .gallery__item--7 {
+        grid-column: auto;
+        grid-row: auto;
+    }
+    
+    footer {
+        margin-top: 4%;
+    }
+}
+
+/* 576px - 480px: Мобильные средние */
+@media (max-width: 576px) {
+    .project_content {
+        padding: 0 10px;
+        width: 80%;
+    }
+    
+    .project_descr {
+        padding: 8% 10%;
+        border-radius: 12px;
+        margin-top: 5%;
+    }
+    
+    .pd_text {
+        font-size: 14px;
+        line-height: 120%;
+        text-align: left;
+    }
+    
+    .purpose_project {
+        padding: 5%;
+    }
+    
+    .purpose h2 {
+        font-size: 17px;
+        text-align: left;
+    }
+    
+    .purpose p {
+        font-size: 13px;
+    }
+    
+    .project_short2 {
+        padding: 8% 10%;
+        border-radius: 12px;
+        margin-top: 5%;
+        color: white;
+    }
+    
+    .project_inf2 {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        margin-bottom: 25px;
+    }
+    
+    .gallery {
+        gap: 15px;
+        margin: 6% 0;
+    }
+    
+    .gallery__item {
+        height: 200px;
+    }
+    
+    .gallery img {
+        border-radius: 12px;
+    }
+    
+    footer {
+        margin-top: 6%;
+        padding: 5% 10px;
+    }
+}
+
+/* 480px - 425px: Мобильные малые */
+@media (max-width: 480px) {
+    .project_descr {
+        padding: 10% 12%;
+        margin-top: 6%;
+    }
+    
+    .pd_text {
+        font-size: 13px;
+        line-height: 115%;
+    }
+    .purpose h2 {
+        font-size: 16px;
+    }
+    
+    .purpose p {
+        font-size: 12px;
+    }
+    
+    .project_short2 {
+        padding: 10% 12%;
+        margin-top: 6%;
+        color: white;
+    }
+    
+    .project_inf2 img {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .gallery__item {
+        height: 180px;
+    }
+    
+    .gallery {
+        gap: 12px;
+        margin: 7% 0;
+    }
+}
+
+/* 425px - 375px: Мобильные очень малые */
+@media (max-width: 425px) {
+    .project_content {
+        padding: 0 5px;
+    }
+    
+    .project_descr {
+        padding: 12% 15%;
+        margin-top: 8%;
+    }
+    
+    .pd_text {
+        font-size: 12px;
+        line-height: 110%;
+    }
+    
+    .purpose_project {
+        padding: 6%;
+    }
+    
+    .purpose h2 {
+        font-size: 15px;
+    }
+    
+    .purpose p {
+        font-size: 11px;
+        line-height: 1.3;
+    }
+    
+    .project_short2 {
+        padding: 12% 15%;
+        margin-top: 8%;
+        color: white;
+    }
+    
+    .gallery__item {
+        height: 160px;
+    }
+    
+    .gallery {
+        margin: 8% 0;
+    }
+    
+    footer {
+        margin-top: 8%;
+    }
+}
+
+/* 375px - 320px: Минимальный размер */
+@media (max-width: 375px) {
+    .project_descr {
+        padding: 15% 18%;
+        border-radius: 10px;
+        margin-top: 10%;
+    }
+    
+    .pd_text {
+        font-size: 11px;
+        line-height: 105%;
+    }
+    
+    .purpose h2 {
+        font-size: 14px;
+    }
+    
+    .purpose p {
+        font-size: 10px;
+    }
+    
+    .project_short2 {
+        padding: 15% 18%;
+        border-radius: 10px;
+        margin-top: 10%;
+        color: white;
+    }
+    
+    .project_inf2 img {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .gallery__item {
+        height: 140px;
+    }
+    
+    .gallery {
+        margin: 10% 0;
+        gap: 10px;
+    }
+    
+    .gallery img {
+        border-radius: 10px;
+    }
+    
+    footer {
+        margin-top: 10%;
+        padding: 8% 5px;
+    }
+}
+
+/* 320px и меньше: Экстренные настройки */
+@media (max-width: 320px) {
+    .project_descr {
+        padding: 18% 20%;
+        margin-top: 12%;
+    }
+    
+    .pd_text {
+        font-size: 10px;
+    }
+    
+    .project_short2 {
+        padding: 18% 20%;
+        margin-top: 12%;
+        color: white;
+    }
+    
+    .gallery__item {
+        height: 120px;
+    }
+    
+    .gallery {
+        margin: 12% 0;
+        gap: 8px;
+    }
+}
+
+
+/* Портретная ориентация на мобильных */
+@media (orientation: portrait) and (max-width: 768px) {
+    .project_descr,
+    .project_short2 {
+        width: 96%;
+        margin-left: auto;
+        margin-right: auto;
+        color: white;
+    }
+    
+    .gallery__item {
+        height: 220px;
+    }
+}
+
+/* Альбомная ориентация на мобильных */
+@media (orientation: landscape) and (max-height: 600px) {
+    .project_descr {
+        padding: 4% 5%;
+    }
+    
+    .gallery {
+        display: grid;
+        grid-template-rows: repeat(8, 20vw);
+    }
+    
+    .gallery__item {
+        height: auto;
+    }
+}
+
+
+@media (min-height: 1000px) {
+    .project_descr {
+        min-height: 400px;
+    }
+    
+    .pd_text {
+        font-size: 20px;
+        line-height: 160%;
+    }
+    
+    .gallery__item {
+        height: 300px;
+    }
+}
+
+
+@media (hover: none) and (pointer: coarse) {
+    .project_inf
+    .project_inf2 {
+        min-height: 44px;
+    }
+    
+    .project_inf img,
+    .project_inf2 img {
+        min-width: 24px;
+        min-height: 24px;
+    }
+    
+    .gallery__item {
+        min-height: 150px;
+    }
+}

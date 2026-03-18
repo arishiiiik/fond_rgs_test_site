@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./document.css">
+    <title>Фонд развития малых городов и сёл "Земля Вологодская"</title>
+</head>
+
+<body>
+    <header>
+        <input type="checkbox" id="burger-toggle" style="display: none;">
+        <!-- Бургер-кнопка -->
+        <label for="burger-toggle" class="burger-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+        <label for="burger-toggle" class="mobile-overlay"></label>
+        <!-- Мобильное меню -->
+        <nav class="mobile-nav">
+            <div class="logo">
+                <img src="./images/logo.png" alt="fond_logo">
+                <div class="logo_text">
+                    <p class="logo-description_1">Земля Вологодская</p>
+                    <p class="logo-description_2">фонд развития малых городов и сёл</p>
+                </div>
+            </div>
+            <ul>
+                <li><a href="./index.html">Главная</a></li>
+                <li><a href="fond.html">Фонд</a></li>
+                <li><a href="project.html">Проекты</a></li>
+                <li><a href="team.html">Команда</a></li>
+                <li><a href="document.html">Документы</a></li>
+                <li><a href="contacts.html">Контакты</a></li>
+            </ul>
+
+            <a href="#" class="button_support open-donation-modal">Поддержать фонд</a>
+        </nav>
+        <!-- Шапка -->
+        <div class="logo">
+            <img src="./images/logo.png" alt="fond_logo">
+            <div class="logo_text">
+                <p class="logo-description_1">Земля Вологодская</p>
+                <p class="logo-description_2">фонд развития малых городов и сёл</p>
+            </div>
+        </div>
+        <div class="navigaciya">
+            <nav>
+                <ul>
+                    <li><a href="./index.html">Главная</a></li>
+                    <li><a href="fond.html">Фонд</a></li>
+                    <li><a href="project.html">Проекты</a></li>
+                    <li><a href="team.html">Команда</a></li>
+                    <li><a href="document.html">Документы</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+        <a href="#" class="button_support open-donation-modal">Поддержать фонд</a>
+    </header>
+
+    <!-- АНИМИРОВАННЫЙ ОФФЕР С КАРУСЕЛЬЮ -->
+    <div class="content_block">
+        <div class="offer-carousel" id="offerCarousel">
+            <!-- Слайд 1 -->
+            <div class="carousel-slide active" data-index="0">
+                <div class="slide-content">
+                    <h1 class="slide-title">Развиваем малые города и сёла Вологодской области</h1>
+                    <p class="slide-text">Создаём условия для устойчивого развития территорий через комплексные
+                        программы поддержки</p>
+                    <a href="#projects" class="slide-button">Узнать о проектах</a>
+                </div>
+                <div class="slide-image">
+                </div>
+            </div>
+
+            <!-- Слайд 2 -->
+            <div class="carousel-slide" data-index="1">
+                <div class="slide-content">
+                    <h1 class="slide-title">Поддержка социальных инициатив</h1>
+                    <p class="slide-text">Реализуем проекты в сфере образования, здравоохранения и социальной поддержки
+                        населения</p>
+                    <a href="#social" class="slide-button">Поддержать инициативы</a>
+                </div>
+                <div class="slide-image">
+                </div>
+            </div>
+
+            <!-- Слайд 3 -->
+            <div class="carousel-slide" data-index="2">
+                <div class="slide-content">
+                    <h1 class="slide-title">Сохранение культурного наследия</h1>
+                    <p class="slide-text">Восстанавливаем памятники архитектуры и развиваем народные промыслы
+                        Вологодчины</p>
+                    <a href="#culture" class="slide-button">Присоединиться</a>
+                </div>
+                <div class="slide-image">
+                </div>
+            </div>
+
+            <!-- Навигация карусели -->
+            <div class="carousel-navigation">
+                <button class="carousel-prev" id="carouselPrev">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="carousel-dots">
+                    <span class="dot active" data-index="0"></span>
+                    <span class="dot" data-index="1"></span>
+                    <span class="dot" data-index="2"></span>
+                </div>
+                <button class="carousel-next" id="carouselNext">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+
+            <!-- Автопереключение индикатор -->
+            <div class="auto-play-indicator">
+                <i class="fas fa-pause" id="autoPlayToggle"></i>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <div class="zagolovok">
+            <p class="zag_main">Отчёты</p>
+            <div class="line"></div>
+            <p class="zag_description">Отчёты о проектах, реализуемых фондом</p>
+        </div>
+        <div class="document_list">
+            <div class="document">
+                <div class="document_zag">
+                    <img src="./images/doc.png" alt="">
+                    <h2>Бухгалтерская отчётность 2020</h2>
+                    <a href="./documents/Бухгалтерская отчетность 2020.pdf" download>Скачать PDF</a>
+                </div>
+            </div>
+            <div class="document">
+                <div class="document_zag">
+                    <img src="./images/doc.png" alt="">
+                    <h2>Бухгалтерская отчётность 2021</h2>
+                    <a href="./documents/Бухгалтерская  отчетность 2021.pdf" download>Скачать PDF</a>
+                </div>
+            </div>
+            <div class="document">
+                <div class="document_zag">
+                    <img src="./images/doc.png" alt="">
+                    <h2>Бухгалтерская отчётность 2023</h2>
+                    <a href="./documents/Бухгалтерская отчетность 2023.pdf" download>Скачать PDF</a>
+                </div>
+            </div>
+            <div class="document">
+                <div class="document_zag">
+                    <img src="./images/doc.png" alt="">
+                    <h2>Бухгалтерская отчётность 2024</h2>
+                    <a href="./documents/Бухгалтерская отчетность 2024.pdf" download>Скачать PDF</a>
+                </div>
+            </div>
+            <div class="document">
+                <div class="document_zag">
+                    <img src="./images/doc.png" alt="">
+                    <h2>Минюст 2019</h2>
+                    <a href="./documents/Минюст 2019.pdf" download>Скачать PDF</a>
+                </div>
+            </div>
+            <div class="document">
+                <div class="document_zag">
+                    <img src="./images/doc.png" alt="">
+                    <h2>Минюст 2020</h2>
+                    <a href="./documents/Минюст 2020.pdf" download>Скачать PDF</a>
+                </div>
+            </div>
+            <div class="document">
+                <div class="document_zag">
+                    <img src="./images/doc.png" alt="">
+                    <h2>Минюст 2021</h2>
+                    <a href="./documents/Минюст 2021.pdf" download>Скачать PDF</a>
+                </div>
+            </div>
+            <div class="document">
+                <div class="document_zag">
+                    <img src="./images/doc.png" alt="">
+                    <h2>Минюст 2022</h2>
+                    <a href="./documents/Минюст 2022.pdf" download>Скачать PDF</a>
+                </div>
+            </div>
+            <div class="document">
+                <div class="document_zag">
+                    <img src="./images/doc.png" alt="">
+                    <h2>Минюст 2024</h2>
+                    <a href="./documents/Минюст 2024.pdf" download>Скачать PDF</a>
+                </div>
+            </div>
+            <div class="document">
+                <div class="document_zag">
+                    <img src="./images/doc.png" alt="">
+                    <h2>Отчёт Матери и дети Победы 2024</h2>
+                    <a href="./documents/Отчет Матери и дети Победы 2024.pdf" download>Скачать PDF</a>
+                </div>
+            </div>
+            <div class="document">
+                <div class="document_zag">
+                    <img src="./images/doc.png" alt="">
+                    <h2>Отчёт традиции и современность</h2>
+                    <a href="./documents/Отчет Традиции и современность.pdf" download>Скачать PDF</a>
+                </div>
+            </div>
+            <div class="document">
+                <div class="document_zag">
+                    <img src="./images/doc.png" alt="">
+                    <h2>Отчёт Усадьба Спасское-Куркино</h2>
+                    <a href="./documents/Отчет Усадьба Спасское-Куркино.docx" download>Скачать PDF</a>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="footer_content_main">
+            <div class="footer_content">
+                <div class="footer_logo_text">
+                    <img class="logo_footer" src="./images/logo.png" alt="">
+                    <div class="text_logo_f">
+                        <h3>Земля Вологодская</h3>
+                        <p>фонд развития малых городов и сёл</p>
+                    </div>
+                </div>
+                <div class="fond_description">
+                    <p>Мобилизация ресурсов для социально-<br>
+                        экономического развития малых городов <br>
+                        и сёл Вологодской области</p>
+                </div>
+            </div>
+            <nav class="footer_nav">
+                <ul>
+                    <li><a href="">О фонде</a></li>
+                    <li><a href="">Новости</a></li>
+                    <li><a href="">Проекты</a></li>
+                    <li><a href="">Люди</a></li>
+                    <li><a href="">Документы</a></li>
+                    <li><a href="">Партнёры</a></li>
+                </ul>
+            </nav>
+            <nav class="footer_nav">
+                <ul>
+                    <li>Контакты:</li>
+                    <li>Адрес: 160035, г. Вологда, Советский пр., 35-а</li>
+                    <li>e-mail: fond.rgs35@yandex.ru</li>
+                    <li>Телефон: (8172) 75 61 37</li>
+                </ul>
+            </nav>
+        </div>
+        <hr class="footer_line">
+        <div class="footer-bottom">
+            <div class="footer-copyright">
+                <p>© 2024 Фонд «Земля Вологодская». Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+    <!-- МОДАЛЬНОЕ ОКНО ДЛЯ ПОЖЕРТВОВАНИЙ -->
+    <div class="modal-overlay" id="donationModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2>Поддержать фонд</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="donationForm">
+                    <div class="form-group">
+                        <label for="donationAmount">Сумма пожертвования (₽) *</label>
+                        <input type="number" id="donationAmount" min="10" step="10" value="500" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="donorName">Ваше имя и фамилия *</label>
+                        <input type="text" id="donorName" placeholder="Иван Иванов" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="donorEmail">Email (для отправки квитанции)</label>
+                        <input type="email" id="donorEmail" placeholder="example@mail.ru">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="sendReceipt" checked>
+                            <span>Отправить электронную квитанцию</span>
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <p class="form-note">После подтверждения вы будете перенаправлены в чат фонда ВКонтакте для
+                            завершения пожертвования</p>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary modal-close">Отмена</button>
+                <button class="btn-primary" id="submitDonation">Перейти к оплате</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- МОДАЛЬНОЕ ОКНО ДЛЯ ПАРТНЁРСТВА -->
+    <div class="modal-overlay" id="partnerModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2>Стать партнёром</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="partnerForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="partnerName">Имя и фамилия *</label>
+                            <input type="text" id="partnerName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="partnerPosition">Должность *</label>
+                            <input type="text" id="partnerPosition" placeholder="Директор, менеджер" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="partnerOrganization">Организация *</label>
+                            <input type="text" id="partnerOrganization" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="partnerPhone">Телефон *</label>
+                            <input type="tel" id="partnerPhone" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="partnerEmail">Email *</label>
+                        <input type="email" id="partnerEmail" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="partnerType">Тип партнёрства *</label>
+                        <select id="partnerType" required>
+                            <option value="">Выберите вариант</option>
+                            <option value="financial">Финансовая поддержка</option>
+                            <option value="resource">Ресурсная поддержка</option>
+                            <option value="expert">Экспертная поддержка</option>
+                            <option value="media">Информационная поддержка</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="partnerMessage">Ваше предложение *</label>
+                        <textarea id="partnerMessage" rows="4" required
+                            placeholder="Опишите ваше предложение о сотрудничестве..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="partnerAgreement" required>
+                            <span>Я согласен на обработку персональных данных</span>
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary modal-close">Отмена</button>
+                <button class="btn-primary" id="submitPartnerForm">Отправить заявку</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- МОДАЛЬНОЕ ОКНО ДЛЯ ВОЛОНТЁРСТВА -->
+    <div class="modal-overlay" id="volunteerModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2>Стать волонтёром</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="volunteerForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="volunteerName">Имя и фамилия *</label>
+                            <input type="text" id="volunteerName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="volunteerAge">Возраст *</label>
+                            <input type="number" id="volunteerAge" min="14" max="100" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="volunteerCity">Город *</label>
+                            <input type="text" id="volunteerCity" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="volunteerPhone">Телефон *</label>
+                            <input type="tel" id="volunteerPhone" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="volunteerEmail">Email *</label>
+                        <input type="email" id="volunteerEmail" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="volunteerInterests">Интересы и навыки *</label>
+                        <select id="volunteerInterests" multiple required>
+                            <option value="ecology">Экология и благоустройство</option>
+                            <option value="social">Социальная помощь</option>
+                            <option value="culture">Культура и традиции</option>
+                            <option value="education">Образовательные проекты</option>
+                            <option value="organization">Организация мероприятий</option>
+                            <option value="it">IT-навыки</option>
+                            <option value="media">Фото/видео съёмка</option>
+                        </select>
+                        <small class="form-hint">Выберите несколько вариантов, удерживая Ctrl</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="volunteerExperience">Опыт волонтёрской деятельности</label>
+                        <textarea id="volunteerExperience" rows="3"
+                            placeholder="Расскажите о вашем опыте (если есть)..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="volunteerAgreement" required>
+                            <span>Я согласен на обработку персональных данных</span>
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary modal-close">Отмена</button>
+                <button class="btn-primary" id="submitVolunteerForm">Стать волонтёром</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- УВЕДОМЛЕНИЕ ОТПРАВКИ -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal-container success-modal">
+            <div class="modal-header">
+                <h2>Заявка отправлена!</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <p class="success-message" id="successMessage">
+                    Спасибо за вашу заявку! Мы свяжемся с вами в ближайшее время.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-primary modal-close">Понятно</button>
+            </div>
+        </div>
+    </div>
+    
+</body>
+
+</html>

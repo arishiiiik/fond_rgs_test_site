@@ -1,0 +1,2490 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ-панель | Земля Вологодская</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="./images/logo.png">
+    <style>
+        /* ОСНОВНЫЕ СТИЛИ В СТИЛИСТИКЕ САЙТА */
+        :root {
+            --primary: #408F36;
+            --primary-light: #87B14B;
+            --primary-dark: #2c6c25;
+            --light: #fffcea;
+            --dark: #7E5B2C;
+            --accent: #e6c17d;
+            --text-dark: #3a2c1a;
+            --text-light: #5a4a30;
+            --shadow: rgba(126, 91, 44, 0.15);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        
+        /* ШАПКА АДМИНКИ */
+        .admin-header {
+            background: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid var(--primary);
+            box-shadow: 0 2px 10px var(--shadow);
+        }
+        
+        .logo-admin {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+        }
+        
+        .logo-admin img {
+            height: 40px;
+            width: auto;
+        }
+        
+        .logo-text h1 {
+            font-family: 'Vezitsa', serif;
+            color: var(--dark);
+            font-size: 1.5rem;
+            font-weight: normal;
+        }
+        
+        .logo-text p {
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-top: 2px;
+        }
+        
+        .admin-actions {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 16px;
+            background: rgba(64, 143, 54, 0.1);
+            border-radius: 20px;
+        }
+        
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .logout-btn {
+            background: none;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+        
+        .logout-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* ОСНОВНОЙ КОНТЕНТ */
+        .admin-container {
+            display: flex;
+            min-height: calc(100vh - 80px);
+        }
+        
+        /* САЙДБАР */
+        .sidebar {
+            width: 220px;
+            background: white;
+            border-right: 1px solid rgba(126, 91, 44, 0.1);
+            padding: 2rem 0;
+        }
+        
+        .nav-section {
+            margin-bottom: 2rem;
+        }
+        
+        .nav-title {
+            font-family: 'Vezitsa', serif;
+            color: var(--dark);
+            font-size: 0.9rem;
+            padding: 0 1.5rem 0.5rem;
+            opacity: 0.7;
+            border-bottom: 1px solid rgba(126, 91, 44, 0.1);
+        }
+        
+        .nav-menu {
+            list-style: none;
+        }
+        
+        .nav-item {
+            padding: 0.8rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: all 0.3s;
+            border-left: 4px solid transparent;
+        }
+        
+        .nav-item:hover {
+            background: rgba(64, 143, 54, 0.05);
+            color: var(--primary);
+        }
+        
+        .nav-item.active {
+            background: rgba(64, 143, 54, 0.1);
+            color: var(--primary);
+            border-left-color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .nav-item i {
+            width: 20px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+        
+        /* ОСНОВНАЯ ОБЛАСТЬ */
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+            background: rgba(255, 252, 234, 0.5);
+        }
+        
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(126, 91, 44, 0.1);
+        }
+        
+        .page-header h2 {
+            font-family: 'Vezitsa', serif;
+            color: var(--dark);
+            font-size: 1.8rem;
+            font-weight: normal;
+        }
+        
+        .add-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .add-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(64, 143, 54, 0.2);
+        }
+        
+        /* ВКЛАДКИ */
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid rgba(126, 91, 44, 0.1);
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .tab:hover {
+            color: var(--primary);
+        }
+        
+        .tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* ТАБЛИЦЫ */
+        .table-container {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px var(--shadow);
+            margin-bottom: 2rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        thead {
+            background: linear-gradient(90deg, rgba(64, 143, 54, 0.1) 0%, rgba(135, 177, 75, 0.1) 100%);
+        }
+        
+        th {
+            padding: 1rem 1.5rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--dark);
+            border-bottom: 2px solid var(--accent);
+        }
+        
+        td {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid rgba(126, 91, 44, 0.1);
+        }
+        
+        tr:hover {
+            background: rgba(255, 252, 234, 0.3);
+        }
+        
+        .status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .status.active {
+            background: rgba(64, 143, 54, 0.1);
+            color: var(--primary);
+        }
+        
+        .status.draft {
+            background: rgba(126, 91, 44, 0.1);
+            color: var(--dark);
+        }
+        
+        .status.new {
+            background: rgba(230, 193, 125, 0.2);
+            color: var(--dark);
+        }
+        
+        .actions {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .action-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            border: 1px solid rgba(126, 91, 44, 0.2);
+            background: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .action-btn.edit {
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .action-btn.edit:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .action-btn.delete {
+            color: #e74c3c;
+            border-color: #e74c3c;
+        }
+        
+        .action-btn.delete:hover {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .action-btn.view {
+            color: var(--dark);
+            border-color: var(--dark);
+        }
+        
+        .action-btn.view:hover {
+            background: var(--dark);
+            color: white;
+        }
+        
+        /* ФОРМЫ */
+        .form-container {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px var(--shadow);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .form-container h2 {
+            font-family: 'Vezitsa', serif;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid rgba(126, 91, 44, 0.2);
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(64, 143, 54, 0.1);
+        }
+        
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(126, 91, 44, 0.1);
+        }
+        
+        .btn {
+            padding: 10px 24px;
+            border-radius: 20px;
+            border: 2px solid transparent;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(64, 143, 54, 0.2);
+        }
+        
+        .btn-outline {
+            background: white;
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background: rgba(64, 143, 54, 0.1);
+        }
+        
+        /* КНОПКА НАЗАД */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: rgba(64, 143, 54, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .back-btn:hover {
+            background: rgba(64, 143, 54, 0.2);
+        }
+        
+        /* УВЕДОМЛЕНИЯ */
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 30px;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            z-index: 1001;
+            transform: translateX(400px);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification.success {
+            background: linear-gradient(90deg, #55993C 0%, #87B14B 100%);
+            border-left: 4px solid #2c6c25;
+        }
+        
+        .notification.error {
+            background: linear-gradient(90deg, #e74c3c 0%, #ff7675 100%);
+            border-left: 4px solid #c0392b;
+        }
+        
+        /* ПУСТЫЕ СОСТОЯНИЯ */
+        .empty-state {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--text-light);
+        }
+        
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.3;
+        }
+        
+        /* ПРЕДПРОСМОТР ИЗОБРАЖЕНИЯ */
+        .image-preview {
+            margin-top: 10px;
+            text-align: center;
+        }
+        
+        .image-preview img {
+            max-width: 200px;
+            max-height: 150px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        /* АДАПТИВНОСТЬ */
+        @media (max-width: 992px) {
+            .admin-container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                padding: 1rem 0;
+                border-right: none;
+                border-bottom: 1px solid rgba(126, 91, 44, 0.1);
+            }
+            
+            .nav-menu {
+                display: flex;
+                overflow-x: auto;
+                padding: 0 1rem;
+            }
+            
+            .nav-item {
+                white-space: nowrap;
+                border-left: none;
+                border-bottom: 4px solid transparent;
+            }
+            
+            .nav-item.active {
+                border-left: none;
+                border-bottom-color: var(--primary);
+            }
+            
+            .nav-title {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .admin-header {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+            
+            .admin-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+            
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            .tabs {
+                overflow-x: auto;
+                flex-wrap: nowrap;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .main-content {
+                padding: 1rem;
+            }
+            
+            .form-container {
+                padding: 1.5rem;
+            }
+            
+            .actions {
+                flex-direction: column;
+            }
+            
+            .action-btn {
+                width: 100%;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ШАПКА -->
+    <header class="admin-header">
+        <a href="index.html" class="logo-admin">
+            <img src="./images/logo.png" alt="Логотип" onerror="this.style.display='none'">
+            <div class="logo-text">
+                <h1>Земля Вологодская</h1>
+                <p>административная панель</p>
+            </div>
+        </a>
+        
+        <div class="admin-actions">
+            <div class="user-info">
+                <div class="user-avatar">АД</div>
+                <div>
+                    <div style="font-weight: 600;">Администратор</div>
+                    <div style="font-size: 0.8rem; color: var(--primary);">admin@fond.ru</div>
+                </div>
+            </div>
+            <a href="index.html" class="logout-btn">
+                <i class="fas fa-home"></i>
+                На сайт
+            </a>
+        </div>
+    </header>
+    
+    <!-- ОСНОВНОЙ КОНТЕНТ -->
+    <div class="admin-container">
+        
+        <!-- ОСНОВНАЯ ОБЛАСТЬ -->
+        <main class="main-content">
+            <!-- НОВОСТИ -->
+            <div class="page-content active" id="newsPage">
+                <div class="page-header">
+                    <h2>Управление новостями</h2>
+                    <a href="#news-add" class="add-btn">
+                        <i class="fas fa-plus"></i>
+                        Добавить новость
+                    </a>
+                </div>
+                
+                <!-- Вкладки для новостей -->
+                <div class="tabs" id="newsTabs">
+                    <button class="tab active" data-tab="news-list">
+                        <i class="fas fa-list"></i>
+                        Список новостей
+                    </button>
+                    <button class="tab" data-tab="news-add">
+                        <i class="fas fa-plus"></i>
+                        Добавить новость
+                    </button>
+                </div>
+                
+                <!-- Список новостей -->
+                <div class="tab-content active" id="news-list">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Заголовок</th>
+                                    <th>Дата</th>
+                                    <th>Статус</th>
+                                    <th>Действия</th>
+                                </tr>
+                            </thead>
+                            <tbody id="newsTable">
+                                <!-- Данные загрузятся через JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Форма добавления новости -->
+                <div class="tab-content" id="news-add">
+                    <div class="form-container">
+                        <h2 id="newsFormTitle">Добавить новость</h2>
+                        
+                        <form id="newsForm">
+                            <div class="form-group">
+                                <label for="newsTitle">Заголовок *</label>
+                                <input type="text" id="newsTitle" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="newsDate">Дата публикации *</label>
+                                <input type="date" id="newsDate" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="newsContent">Текст новости *</label>
+                                <textarea id="newsContent" class="form-control" rows="8" required></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="newsImage">Изображение (URL)</label>
+                                <input type="text" id="newsImage" class="form-control" placeholder="https://example.com/image.jpg">
+                                <div class="image-preview" id="newsImagePreview"></div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="newsStatus">Статус</label>
+                                    <select id="newsStatus" class="form-control">
+                                        <option value="active">Опубликована</option>
+                                        <option value="draft">Черновик</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="newsCategory">Категория</label>
+                                    <select id="newsCategory" class="form-control">
+                                        <option value="news">Новость</option>
+                                        <option value="event">Событие</option>
+                                        <option value="report">Отчёт</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-outline" onclick="switchTab('news', 'news-list')">Отмена</button>
+                                <button type="submit" class="btn btn-primary">Сохранить новость</button>
+                            </div>
+                            
+                            <input type="hidden" id="newsId">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ПРОЕКТЫ -->
+            <div class="page-content" id="projectsPage">
+                <div class="page-header">
+                    <h2>Управление проектами</h2>
+                    <a href="#projects-add" class="add-btn">
+                        <i class="fas fa-plus"></i>
+                        Добавить проект
+                    </a>
+                </div>
+                
+                <!-- Вкладки для проектов -->
+                <div class="tabs" id="projectsTabs">
+                    <button class="tab active" data-tab="projects-list">
+                        <i class="fas fa-list"></i>
+                        Список проектов
+                    </button>
+                    <button class="tab" data-tab="projects-add">
+                        <i class="fas fa-plus"></i>
+                        Добавить проект
+                    </button>
+                </div>
+                
+                <!-- Список проектов -->
+                <div class="tab-content active" id="projects-list">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Название</th>
+                                    <th>Город</th>
+                                    <th>Статус</th>
+                                    <th>Действия</th>
+                                </tr>
+                            </thead>
+                            <tbody id="projectsTable">
+                                <!-- Данные загрузятся через JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Форма добавления проекта -->
+                <div class="tab-content" id="projects-add">
+                    <div class="form-container">
+                        <h2 id="projectFormTitle">Добавить проект</h2>
+                        
+                        <form id="projectForm">
+                            <div class="form-group">
+                                <label for="projectTitle">Название проекта *</label>
+                                <input type="text" id="projectTitle" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="projectCity">Город *</label>
+                                    <input type="text" id="projectCity" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="projectStatus">Статус</label>
+                                    <select id="projectStatus" class="form-control">
+                                        <option value="active">Активный</option>
+                                        <option value="planned">В планах</option>
+                                        <option value="completed">Завершён</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="projectStartDate">Дата начала</label>
+                                    <input type="date" id="projectStartDate" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="projectEndDate">Дата окончания</label>
+                                    <input type="date" id="projectEndDate" class="form-control">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="projectDescription">Описание проекта *</label>
+                                <textarea id="projectDescription" class="form-control" rows="6" required></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="projectImage">Изображение (URL)</label>
+                                <input type="text" id="projectImage" class="form-control" placeholder="https://example.com/image.jpg">
+                                <div class="image-preview" id="projectImagePreview"></div>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-outline" onclick="switchTab('projects', 'projects-list')">Отмена</button>
+                                <button type="submit" class="btn btn-primary">Сохранить проект</button>
+                            </div>
+                            
+                            <input type="hidden" id="projectId">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- СЛАЙДЕР -->
+            <div class="page-content" id="sliderPage">
+                <div class="page-header">
+                    <h2>Управление слайдером</h2>
+                    <a href="#slider-add" class="add-btn">
+                        <i class="fas fa-plus"></i>
+                        Добавить слайд
+                    </a>
+                </div>
+                
+                <!-- Вкладки для слайдера -->
+                <div class="tabs" id="sliderTabs">
+                    <button class="tab active" data-tab="slider-list">
+                        <i class="fas fa-list"></i>
+                        Список слайдов
+                    </button>
+                    <button class="tab" data-tab="slider-add">
+                        <i class="fas fa-plus"></i>
+                        Добавить слайд
+                    </button>
+                </div>
+                
+                <!-- Список слайдов -->
+                <div class="tab-content active" id="slider-list">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Заголовок</th>
+                                    <th>Порядок</th>
+                                    <th>Статус</th>
+                                    <th>Действия</th>
+                                </tr>
+                            </thead>
+                            <tbody id="sliderTable">
+                                <!-- Данные загрузятся через JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Форма добавления слайда -->
+                <div class="tab-content" id="slider-add">
+                    <div class="form-container">
+                        <h2 id="slideFormTitle">Добавить слайд</h2>
+                        
+                        <form id="slideForm">
+                            <div class="form-group">
+                                <label for="slideTitle">Заголовок слайда *</label>
+                                <input type="text" id="slideTitle" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="slideDescription">Описание слайда</label>
+                                <textarea id="slideDescription" class="form-control" rows="4"></textarea>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="slideOrder">Порядок отображения *</label>
+                                    <input type="number" id="slideOrder" class="form-control" min="1" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="slideStatus">Статус</label>
+                                    <select id="slideStatus" class="form-control">
+                                        <option value="active">Активен</option>
+                                        <option value="draft">Скрыт</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="slideImage">Изображение (URL) *</label>
+                                <input type="text" id="slideImage" class="form-control" required placeholder="https://example.com/image.jpg">
+                                <div class="image-preview" id="slideImagePreview"></div>
+                                <small style="color: var(--text-light); display: block; margin-top: 5px;">Рекомендуемый размер: 1200x600px</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="slideButtonText">Текст кнопки</label>
+                                <input type="text" id="slideButtonText" class="form-control" placeholder="Узнать подробнее">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="slideButtonLink">Ссылка кнопки</label>
+                                <input type="text" id="slideButtonLink" class="form-control" placeholder="#projects">
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-outline" onclick="switchTab('slider', 'slider-list')">Отмена</button>
+                                <button type="submit" class="btn btn-primary">Сохранить слайд</button>
+                            </div>
+                            
+                            <input type="hidden" id="slideId">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- КОМАНДА -->
+            <div class="page-content" id="peoplePage">
+                <div class="page-header">
+                    <h2>Управление командой</h2>
+                    <a href="#people-add" class="add-btn">
+                        <i class="fas fa-plus"></i>
+                        Добавить человека
+                    </a>
+                </div>
+                
+                <!-- Вкладки для команды -->
+                <div class="tabs" id="peopleTabs">
+                    <button class="tab active" data-tab="people-list">
+                        <i class="fas fa-list"></i>
+                        Список команды
+                    </button>
+                    <button class="tab" data-tab="people-add">
+                        <i class="fas fa-plus"></i>
+                        Добавить человека
+                    </button>
+                </div>
+                
+                <!-- Список команды -->
+                <div class="tab-content active" id="people-list">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Имя</th>
+                                    <th>Должность</th>
+                                    <th>Статус</th>
+                                    <th>Действия</th>
+                                </tr>
+                            </thead>
+                            <tbody id="peopleTable">
+                                <!-- Данные загрузятся через JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Форма добавления человека -->
+                <div class="tab-content" id="people-add">
+                    <div class="form-container">
+                        <h2 id="personFormTitle">Добавить человека</h2>
+                        
+                        <form id="personForm">
+                            <div class="form-group">
+                                <label for="personName">Имя и фамилия *</label>
+                                <input type="text" id="personName" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="personPosition">Должность *</label>
+                                <input type="text" id="personPosition" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="personDescription">Описание</label>
+                                <textarea id="personDescription" class="form-control" rows="4"></textarea>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="personEmail">Email</label>
+                                    <input type="email" id="personEmail" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="personPhone">Телефон</label>
+                                    <input type="tel" id="personPhone" class="form-control">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="personImage">Фотография (URL)</label>
+                                <input type="text" id="personImage" class="form-control" placeholder="https://example.com/photo.jpg">
+                                <div class="image-preview" id="personImagePreview"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="personStatus">Статус</label>
+                                <select id="personStatus" class="form-control">
+                                    <option value="active">Активен</option>
+                                    <option value="draft">Скрыт</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-outline" onclick="switchTab('people', 'people-list')">Отмена</button>
+                                <button type="submit" class="btn btn-primary">Сохранить</button>
+                            </div>
+                            
+                            <input type="hidden" id="personId">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ЗАЯВКИ -->
+            <div class="page-content" id="applicationsPage">
+                <div class="page-header">
+                    <h2>Заявки</h2>
+                    <select class="form-control" style="width: auto;" id="filterStatus">
+                        <option value="all">Все заявки</option>
+                        <option value="new">Новые</option>
+                        <option value="processed">В обработке</option>
+                        <option value="completed">Завершены</option>
+                    </select>
+                </div>
+                
+                <!-- Вкладки для заявок -->
+                <div class="tabs" id="applicationsTabs">
+                    <button class="tab active" data-tab="applications-list">
+                        <i class="fas fa-list"></i>
+                        Список заявок
+                    </button>
+                    <button class="tab" data-tab="application-view">
+                        <i class="fas fa-eye"></i>
+                        Просмотр заявки
+                    </button>
+                </div>
+                
+                <!-- Список заявок -->
+                <div class="tab-content active" id="applications-list">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Имя</th>
+                                    <th>Тип</th>
+                                    <th>Дата</th>
+                                    <th>Статус</th>
+                                    <th>Действия</th>
+                                </tr>
+                            </thead>
+                            <tbody id="applicationsTable">
+                                <!-- Данные загрузятся через JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Просмотр заявки -->
+                <div class="tab-content" id="application-view">
+                    <div class="form-container" id="applicationViewContainer">
+                        <!-- Данные заявки загрузятся через JS -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- УВЕДОМЛЕНИЯ -->
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle"></i>
+        <span id="notificationText">Успешно сохранено</span>
+    </div>
+    
+    <script>
+        // ДАННЫЕ В LOCALSTORAGE
+        const data = {
+            news: JSON.parse(localStorage.getItem('fond_news')) || [
+                {
+                    id: 1,
+                    title: "Растить сад прекрасный каждому дано!",
+                    date: "2026-01-20",
+                    content: "Новый проект «Сад неограниченных возможностей» получил федеральное финансирование.",
+                    image: "./images/new1.png",
+                    status: "active",
+                    category: "news"
+                }
+            ],
+            
+            projects: JSON.parse(localStorage.getItem('fond_projects')) || [
+                {
+                    id: 1,
+                    title: "Сад неограниченных возможностей",
+                    city: "Вологда",
+                    description: "Социальная адаптация через садоводство",
+                    status: "active",
+                    startDate: "2026-01-15",
+                    endDate: "2026-12-15",
+                    image: "./images/project/project2.png"
+                }
+            ],
+            
+            slider: JSON.parse(localStorage.getItem('fond_slider')) || [
+                {
+                    id: 1,
+                    title: "Развиваем малые города и сёла",
+                    description: "Создаём условия для устойчивого развития территорий",
+                    order: 1,
+                    image: "./images/fon1.png",
+                    buttonText: "Узнать о проектах",
+                    buttonLink: "#projects",
+                    status: "active"
+                }
+            ],
+            
+            people: JSON.parse(localStorage.getItem('fond_people')) || [
+                {
+                    id: 1,
+                    name: "Марина Кудряшова",
+                    position: "Директор фонда",
+                    description: "Основатель и руководитель",
+                    status: "active",
+                    image: ""
+                }
+            ],
+            
+            applications: JSON.parse(localStorage.getItem('fond_applications')) || [
+                {
+                    id: 1,
+                    name: "Иванов Алексей Петрович",
+                    type: "Волонтёрство",
+                    date: "2026-01-20",
+                    email: "ivanov@example.com",
+                    phone: "+7 911 123-45-67",
+                    message: "Хочу помочь в проекте 'Сад неограниченных возможностей'. Имею опыт работы в садоводстве.",
+                    status: "new",
+                    adminComment: "",
+                    createdAt: new Date().toISOString()
+                }
+            ]
+        };
+        
+        // СОХРАНИТЬ ДАННЫЕ
+        function saveData() {
+            localStorage.setItem('fond_news', JSON.stringify(data.news));
+            localStorage.setItem('fond_projects', JSON.stringify(data.projects));
+            localStorage.setItem('fond_slider', JSON.stringify(data.slider));
+            localStorage.setItem('fond_people', JSON.stringify(data.people));
+            localStorage.setItem('fond_applications', JSON.stringify(data.applications));
+        }
+        
+        // ПОКАЗАТЬ УВЕДОМЛЕНИЕ
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            const text = document.getElementById('notificationText');
+            
+            notification.className = `notification ${type}`;
+            text.textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+        
+        // ПЕРЕКЛЮЧЕНИЕ СТРАНИЦ
+        function showPage(pageId) {
+            // Скрыть все страницы
+            document.querySelectorAll('.page-content').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Показать нужную страницу
+            const page = document.getElementById(pageId + 'Page');
+            if (page) {
+                page.classList.add('active');
+                
+                // Загрузить данные для страницы
+                loadPageData(pageId);
+                
+                // Активировать первую вкладку
+                const tabs = page.querySelector('.tabs');
+                if (tabs) {
+                    const firstTab = tabs.querySelector('.tab');
+                    if (firstTab) {
+                        switchTab(pageId, firstTab.getAttribute('data-tab'));
+                    }
+                }
+            }
+            
+            // Обновить активную ссылку в меню
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('data-page') === pageId) {
+                    item.classList.add('active');
+                }
+            });
+        }
+        
+        // ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК
+        function switchTab(page, tabId) {
+            // Найти все вкладки на текущей странице
+            const tabsContainer = document.getElementById(page + 'Tabs');
+            if (!tabsContainer) return;
+            
+            // Деактивировать все вкладки
+            tabsContainer.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Активировать выбранную вкладку
+            const activeTab = tabsContainer.querySelector(`[data-tab="${tabId}"]`);
+            if (activeTab) {
+                activeTab.classList.add('active');
+            }
+            
+            // Скрыть все содержимое вкладок
+            document.querySelectorAll(`#${page}Page .tab-content`).forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Показать выбранное содержимое
+            const activeContent = document.getElementById(tabId);
+            if (activeContent) {
+                activeContent.classList.add('active');
+                
+                // Если это форма редактирования, загрузить данные
+                if (tabId === 'news-edit') {
+                    const newsId = activeContent.querySelector('#newsId')?.value;
+                    if (newsId) loadNewsForm(parseInt(newsId));
+                } else if (tabId === 'project-edit') {
+                    const projectId = activeContent.querySelector('#projectId')?.value;
+                    if (projectId) loadProjectForm(parseInt(projectId));
+                } else if (tabId === 'slide-edit') {
+                    const slideId = activeContent.querySelector('#slideId')?.value;
+                    if (slideId) loadSlideForm(parseInt(slideId));
+                } else if (tabId === 'person-edit') {
+                    const personId = activeContent.querySelector('#personId')?.value;
+                    if (personId) loadPersonForm(parseInt(personId));
+                } else if (tabId === 'application-view') {
+                    // Просмотр заявки уже загружен
+                }
+            }
+        }
+        
+        // ЗАГРУЗКА ДАННЫХ СТРАНИЦЫ
+        function loadPageData(pageId) {
+            switch(pageId) {
+                case 'news':
+                    loadNewsList();
+                    break;
+                case 'projects':
+                    loadProjectsList();
+                    break;
+                case 'slider':
+                    loadSliderList();
+                    break;
+                case 'people':
+                    loadPeopleList();
+                    break;
+                case 'applications':
+                    loadApplicationsList();
+                    break;
+            }
+        }
+        
+        // ФОРМАТИРОВАНИЕ ДАТЫ
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('ru-RU');
+        }
+        
+        // ТЕКСТ СТАТУСА
+        function getStatusText(status) {
+            const statuses = {
+                'new': 'Новая',
+                'processed': 'В обработке',
+                'completed': 'Завершена',
+                'active': 'Активна',
+                'draft': 'Черновик'
+            };
+            return statuses[status] || status;
+        }
+        
+        // ЗАГРУЗКА СПИСКА НОВОСТЕЙ
+        function loadNewsList() {
+            const tbody = document.getElementById('newsTable');
+            tbody.innerHTML = '';
+            
+            if (data.news.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="4" class="empty-state">
+                            <i class="fas fa-newspaper"></i>
+                            <p>Новостей пока нет</p>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            data.news.sort((a, b) => new Date(b.date) - new Date(a.date)).forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><strong>${item.title}</strong></td>
+                    <td>${formatDate(item.date)}</td>
+                    <td><span class="status ${item.status}">${item.status === 'active' ? 'Опубликована' : 'Черновик'}</span></td>
+                    <td>
+                        <div class="actions">
+                            <button class="action-btn edit" onclick="editNews(${item.id})">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="action-btn delete" onclick="deleteItem('news', ${item.id})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+        
+        // ЗАГРУЗКА СПИСКА ПРОЕКТОВ
+        function loadProjectsList() {
+            const tbody = document.getElementById('projectsTable');
+            tbody.innerHTML = '';
+            
+            if (data.projects.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="4" class="empty-state">
+                            <i class="fas fa-project-diagram"></i>
+                            <p>Проектов пока нет</p>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            data.projects.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><strong>${item.title}</strong></td>
+                    <td>${item.city}</td>
+                    <td><span class="status ${item.status}">${item.status === 'active' ? 'Активен' : item.status === 'completed' ? 'Завершён' : 'В планах'}</span></td>
+                    <td>
+                        <div class="actions">
+                            <button class="action-btn edit" onclick="editProject(${item.id})">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="action-btn delete" onclick="deleteItem('projects', ${item.id})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+        
+        // ЗАГРУЗКА СПИСКА СЛАЙДОВ
+        function loadSliderList() {
+            const tbody = document.getElementById('sliderTable');
+            tbody.innerHTML = '';
+            
+            if (data.slider.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="4" class="empty-state">
+                            <i class="fas fa-images"></i>
+                            <p>Слайдов пока нет</p>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            data.slider.sort((a, b) => a.order - b.order).forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><strong>${item.title}</strong></td>
+                    <td>${item.order}</td>
+                    <td><span class="status ${item.status}">${item.status === 'active' ? 'Активен' : 'Скрыт'}</span></td>
+                    <td>
+                        <div class="actions">
+                            <button class="action-btn edit" onclick="editSlide(${item.id})">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="action-btn delete" onclick="deleteItem('slider', ${item.id})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+        
+        // ЗАГРУЗКА СПИСКА КОМАНДЫ
+        function loadPeopleList() {
+            const tbody = document.getElementById('peopleTable');
+            tbody.innerHTML = '';
+            
+            if (data.people.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="4" class="empty-state">
+                            <i class="fas fa-users"></i>
+                            <p>Людей в команде пока нет</p>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            data.people.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><strong>${item.name}</strong></td>
+                    <td>${item.position}</td>
+                    <td><span class="status ${item.status}">${item.status === 'active' ? 'Активен' : 'Скрыт'}</span></td>
+                    <td>
+                        <div class="actions">
+                            <button class="action-btn edit" onclick="editPerson(${item.id})">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="action-btn delete" onclick="deleteItem('people', ${item.id})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+        
+        // ЗАГРУЗКА СПИСКА ЗАЯВОК
+        function loadApplicationsList() {
+            const tbody = document.getElementById('applicationsTable');
+            const filter = document.getElementById('filterStatus').value;
+            tbody.innerHTML = '';
+            
+            let filtered = data.applications;
+            if (filter !== 'all') {
+                filtered = data.applications.filter(app => app.status === filter);
+            }
+            
+            if (filtered.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="5" class="empty-state">
+                            <i class="fas fa-inbox"></i>
+                            <p>Заявок пока нет</p>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            filtered.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).forEach(app => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><strong>${app.name}</strong></td>
+                    <td>${app.type}</td>
+                    <td>${formatDate(app.date)}</td>
+                    <td><span class="status ${app.status}">${getStatusText(app.status)}</span></td>
+                    <td>
+                        <div class="actions">
+                            <button class="action-btn view" onclick="viewApplication(${app.id})">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="action-btn edit" onclick="editApplicationStatus(${app.id})">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+        
+        // ДОБАВИТЬ НОВОСТЬ (переход на вкладку)
+        function addNews() {
+            showPage('news');
+            setTimeout(() => {
+                switchTab('news', 'news-add');
+                document.getElementById('newsFormTitle').textContent = 'Добавить новость';
+                document.getElementById('newsForm').reset();
+                document.getElementById('newsId').value = '';
+                document.getElementById('newsDate').value = new Date().toISOString().split('T')[0];
+                document.getElementById('newsImagePreview').innerHTML = '';
+            }, 100);
+        }
+        
+        // РЕДАКТИРОВАТЬ НОВОСТЬ (создание вкладки редактирования)
+        function editNews(id) {
+            const news = data.news.find(item => item.id === id);
+            if (!news) return;
+            
+            showPage('news');
+            
+            // Создаем вкладку редактирования, если ее нет
+            const tabsContainer = document.getElementById('newsTabs');
+            let editTab = tabsContainer.querySelector('[data-tab="news-edit"]');
+            
+            if (!editTab) {
+                // Создаем вкладку
+                editTab = document.createElement('button');
+                editTab.className = 'tab';
+                editTab.setAttribute('data-tab', 'news-edit');
+                editTab.innerHTML = '<i class="fas fa-edit"></i> Редактировать';
+                tabsContainer.appendChild(editTab);
+                
+                // Создаем содержимое вкладки
+                const editContent = document.createElement('div');
+                editContent.className = 'tab-content';
+                editContent.id = 'news-edit';
+                editContent.innerHTML = `
+                    <div class="form-container">
+                        <h2>Редактировать новость</h2>
+                        <form id="newsEditForm">
+                            <div class="form-group">
+                                <label for="editNewsTitle">Заголовок *</label>
+                                <input type="text" id="editNewsTitle" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="editNewsDate">Дата публикации *</label>
+                                <input type="date" id="editNewsDate" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="editNewsContent">Текст новости *</label>
+                                <textarea id="editNewsContent" class="form-control" rows="8" required></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="editNewsImage">Изображение (URL)</label>
+                                <input type="text" id="editNewsImage" class="form-control" placeholder="https://example.com/image.jpg">
+                                <div class="image-preview" id="editNewsImagePreview"></div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="editNewsStatus">Статус</label>
+                                    <select id="editNewsStatus" class="form-control">
+                                        <option value="active">Опубликована</option>
+                                        <option value="draft">Черновик</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="editNewsCategory">Категория</label>
+                                    <select id="editNewsCategory" class="form-control">
+                                        <option value="news">Новость</option>
+                                        <option value="event">Событие</option>
+                                        <option value="report">Отчёт</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-outline" onclick="switchTab('news', 'news-list')">Отмена</button>
+                                <button type="button" class="btn btn-primary" onclick="saveEditedNews()">Сохранить изменения</button>
+                            </div>
+                            
+                            <input type="hidden" id="editNewsId" value="${id}">
+                        </form>
+                    </div>
+                `;
+                document.getElementById('newsPage').appendChild(editContent);
+                
+                // Добавляем обработчик изменения изображения
+                document.getElementById('editNewsImage').addEventListener('input', function() {
+                    const preview = document.getElementById('editNewsImagePreview');
+                    if (this.value) {
+                        preview.innerHTML = `<img src="${this.value}" alt="Предпросмотр" onerror="this.style.display='none'">`;
+                    } else {
+                        preview.innerHTML = '';
+                    }
+                });
+            }
+            
+            // Переключаемся на вкладку редактирования
+            setTimeout(() => {
+                switchTab('news', 'news-edit');
+                loadNewsForm(id);
+            }, 100);
+        }
+        
+        // ЗАГРУЗИТЬ ФОРМУ НОВОСТИ
+        function loadNewsForm(id) {
+            const news = data.news.find(item => item.id === id);
+            if (!news) return;
+            
+            document.getElementById('editNewsId').value = news.id;
+            document.getElementById('editNewsTitle').value = news.title;
+            document.getElementById('editNewsDate').value = news.date;
+            document.getElementById('editNewsContent').value = news.content;
+            document.getElementById('editNewsImage').value = news.image || '';
+            document.getElementById('editNewsStatus').value = news.status;
+            document.getElementById('editNewsCategory').value = news.category || 'news';
+            
+            // Показать превью изображения
+            const preview = document.getElementById('editNewsImagePreview');
+            if (news.image) {
+                preview.innerHTML = `<img src="${news.image}" alt="Предпросмотр" onerror="this.style.display='none'">`;
+            } else {
+                preview.innerHTML = '';
+            }
+        }
+        
+        // СОХРАНИТЬ ОТРЕДАКТИРОВАННУЮ НОВОСТЬ
+        function saveEditedNews() {
+            const id = parseInt(document.getElementById('editNewsId').value);
+            const newsData = {
+                title: document.getElementById('editNewsTitle').value,
+                date: document.getElementById('editNewsDate').value,
+                content: document.getElementById('editNewsContent').value,
+                image: document.getElementById('editNewsImage').value,
+                status: document.getElementById('editNewsStatus').value,
+                category: document.getElementById('editNewsCategory').value
+            };
+            
+            const index = data.news.findIndex(item => item.id === id);
+            if (index !== -1) {
+                data.news[index] = { ...data.news[index], ...newsData };
+                saveData();
+                loadNewsList();
+                showNotification('Новость обновлена', 'success');
+                setTimeout(() => {
+                    switchTab('news', 'news-list');
+                }, 500);
+            }
+        }
+        
+        // ДОБАВИТЬ ПРОЕКТ (переход на вкладку)
+        function addProject() {
+            showPage('projects');
+            setTimeout(() => {
+                switchTab('projects', 'projects-add');
+                document.getElementById('projectFormTitle').textContent = 'Добавить проект';
+                document.getElementById('projectForm').reset();
+                document.getElementById('projectId').value = '';
+                document.getElementById('projectImagePreview').innerHTML = '';
+            }, 100);
+        }
+        
+        // РЕДАКТИРОВАТЬ ПРОЕКТ
+        function editProject(id) {
+            const project = data.projects.find(item => item.id === id);
+            if (!project) return;
+            
+            showPage('projects');
+            
+            // Создаем вкладку редактирования, если ее нет
+            const tabsContainer = document.getElementById('projectsTabs');
+            let editTab = tabsContainer.querySelector('[data-tab="project-edit"]');
+            
+            if (!editTab) {
+                editTab = document.createElement('button');
+                editTab.className = 'tab';
+                editTab.setAttribute('data-tab', 'project-edit');
+                editTab.innerHTML = '<i class="fas fa-edit"></i> Редактировать';
+                tabsContainer.appendChild(editTab);
+                
+                const editContent = document.createElement('div');
+                editContent.className = 'tab-content';
+                editContent.id = 'project-edit';
+                editContent.innerHTML = `
+                    <div class="form-container">
+                        <h2>Редактировать проект</h2>
+                        <form id="projectEditForm">
+                            <div class="form-group">
+                                <label for="editProjectTitle">Название проекта *</label>
+                                <input type="text" id="editProjectTitle" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="editProjectCity">Город *</label>
+                                    <input type="text" id="editProjectCity" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="editProjectStatus">Статус</label>
+                                    <select id="editProjectStatus" class="form-control">
+                                        <option value="active">Активный</option>
+                                        <option value="planned">В планах</option>
+                                        <option value="completed">Завершён</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="editProjectStartDate">Дата начала</label>
+                                    <input type="date" id="editProjectStartDate" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="editProjectEndDate">Дата окончания</label>
+                                    <input type="date" id="editProjectEndDate" class="form-control">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="editProjectDescription">Описание проекта *</label>
+                                <textarea id="editProjectDescription" class="form-control" rows="6" required></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="editProjectImage">Изображение (URL)</label>
+                                <input type="text" id="editProjectImage" class="form-control" placeholder="https://example.com/image.jpg">
+                                <div class="image-preview" id="editProjectImagePreview"></div>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-outline" onclick="switchTab('projects', 'projects-list')">Отмена</button>
+                                <button type="button" class="btn btn-primary" onclick="saveEditedProject()">Сохранить изменения</button>
+                            </div>
+                            
+                            <input type="hidden" id="editProjectId" value="${id}">
+                        </form>
+                    </div>
+                `;
+                document.getElementById('projectsPage').appendChild(editContent);
+                
+                document.getElementById('editProjectImage').addEventListener('input', function() {
+                    const preview = document.getElementById('editProjectImagePreview');
+                    if (this.value) {
+                        preview.innerHTML = `<img src="${this.value}" alt="Предпросмотр" onerror="this.style.display='none'">`;
+                    } else {
+                        preview.innerHTML = '';
+                    }
+                });
+            }
+            
+            setTimeout(() => {
+                switchTab('projects', 'project-edit');
+                loadProjectForm(id);
+            }, 100);
+        }
+        
+        // ЗАГРУЗИТЬ ФОРМУ ПРОЕКТА
+        function loadProjectForm(id) {
+            const project = data.projects.find(item => item.id === id);
+            if (!project) return;
+            
+            document.getElementById('editProjectId').value = project.id;
+            document.getElementById('editProjectTitle').value = project.title;
+            document.getElementById('editProjectCity').value = project.city;
+            document.getElementById('editProjectStatus').value = project.status;
+            document.getElementById('editProjectStartDate').value = project.startDate || '';
+            document.getElementById('editProjectEndDate').value = project.endDate || '';
+            document.getElementById('editProjectDescription').value = project.description;
+            document.getElementById('editProjectImage').value = project.image || '';
+            
+            const preview = document.getElementById('editProjectImagePreview');
+            if (project.image) {
+                preview.innerHTML = `<img src="${project.image}" alt="Предпросмотр" onerror="this.style.display='none'">`;
+            } else {
+                preview.innerHTML = '';
+            }
+        }
+        
+        // СОХРАНИТЬ ОТРЕДАКТИРОВАННЫЙ ПРОЕКТ
+        function saveEditedProject() {
+            const id = parseInt(document.getElementById('editProjectId').value);
+            const projectData = {
+                title: document.getElementById('editProjectTitle').value,
+                city: document.getElementById('editProjectCity').value,
+                status: document.getElementById('editProjectStatus').value,
+                startDate: document.getElementById('editProjectStartDate').value,
+                endDate: document.getElementById('editProjectEndDate').value,
+                description: document.getElementById('editProjectDescription').value,
+                image: document.getElementById('editProjectImage').value
+            };
+            
+            const index = data.projects.findIndex(item => item.id === id);
+            if (index !== -1) {
+                data.projects[index] = { ...data.projects[index], ...projectData };
+                saveData();
+                loadProjectsList();
+                showNotification('Проект обновлён', 'success');
+                setTimeout(() => {
+                    switchTab('projects', 'projects-list');
+                }, 500);
+            }
+        }
+        
+        // ДОБАВИТЬ СЛАЙД (переход на вкладку)
+        function addSlide() {
+            showPage('slider');
+            setTimeout(() => {
+                switchTab('slider', 'slider-add');
+                document.getElementById('slideFormTitle').textContent = 'Добавить слайд';
+                document.getElementById('slideForm').reset();
+                document.getElementById('slideId').value = '';
+                document.getElementById('slideOrder').value = data.slider.length + 1;
+                document.getElementById('slideImagePreview').innerHTML = '';
+            }, 100);
+        }
+        
+        // РЕДАКТИРОВАТЬ СЛАЙД
+        function editSlide(id) {
+            const slide = data.slider.find(item => item.id === id);
+            if (!slide) return;
+            
+            showPage('slider');
+            
+            const tabsContainer = document.getElementById('sliderTabs');
+            let editTab = tabsContainer.querySelector('[data-tab="slide-edit"]');
+            
+            if (!editTab) {
+                editTab = document.createElement('button');
+                editTab.className = 'tab';
+                editTab.setAttribute('data-tab', 'slide-edit');
+                editTab.innerHTML = '<i class="fas fa-edit"></i> Редактировать';
+                tabsContainer.appendChild(editTab);
+                
+                const editContent = document.createElement('div');
+                editContent.className = 'tab-content';
+                editContent.id = 'slide-edit';
+                editContent.innerHTML = `
+                    <div class="form-container">
+                        <h2>Редактировать слайд</h2>
+                        <form id="slideEditForm">
+                            <div class="form-group">
+                                <label for="editSlideTitle">Заголовок слайда *</label>
+                                <input type="text" id="editSlideTitle" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="editSlideDescription">Описание слайда</label>
+                                <textarea id="editSlideDescription" class="form-control" rows="4"></textarea>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="editSlideOrder">Порядок отображения *</label>
+                                    <input type="number" id="editSlideOrder" class="form-control" min="1" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="editSlideStatus">Статус</label>
+                                    <select id="editSlideStatus" class="form-control">
+                                        <option value="active">Активен</option>
+                                        <option value="draft">Скрыт</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="editSlideImage">Изображение (URL) *</label>
+                                <input type="text" id="editSlideImage" class="form-control" required placeholder="https://example.com/image.jpg">
+                                <div class="image-preview" id="editSlideImagePreview"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="editSlideButtonText">Текст кнопки</label>
+                                <input type="text" id="editSlideButtonText" class="form-control" placeholder="Узнать подробнее">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="editSlideButtonLink">Ссылка кнопки</label>
+                                <input type="text" id="editSlideButtonLink" class="form-control" placeholder="#projects">
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-outline" onclick="switchTab('slider', 'slider-list')">Отмена</button>
+                                <button type="button" class="btn btn-primary" onclick="saveEditedSlide()">Сохранить изменения</button>
+                            </div>
+                            
+                            <input type="hidden" id="editSlideId" value="${id}">
+                        </form>
+                    </div>
+                `;
+                document.getElementById('sliderPage').appendChild(editContent);
+                
+                document.getElementById('editSlideImage').addEventListener('input', function() {
+                    const preview = document.getElementById('editSlideImagePreview');
+                    if (this.value) {
+                        preview.innerHTML = `<img src="${this.value}" alt="Предпросмотр" onerror="this.style.display='none'">`;
+                    } else {
+                        preview.innerHTML = '';
+                    }
+                });
+            }
+            
+            setTimeout(() => {
+                switchTab('slider', 'slide-edit');
+                loadSlideForm(id);
+            }, 100);
+        }
+        
+        // ЗАГРУЗИТЬ ФОРМУ СЛАЙДА
+        function loadSlideForm(id) {
+            const slide = data.slider.find(item => item.id === id);
+            if (!slide) return;
+            
+            document.getElementById('editSlideId').value = slide.id;
+            document.getElementById('editSlideTitle').value = slide.title;
+            document.getElementById('editSlideDescription').value = slide.description || '';
+            document.getElementById('editSlideOrder').value = slide.order;
+            document.getElementById('editSlideStatus').value = slide.status;
+            document.getElementById('editSlideImage').value = slide.image;
+            document.getElementById('editSlideButtonText').value = slide.buttonText || '';
+            document.getElementById('editSlideButtonLink').value = slide.buttonLink || '';
+            
+            const preview = document.getElementById('editSlideImagePreview');
+            if (slide.image) {
+                preview.innerHTML = `<img src="${slide.image}" alt="Предпросмотр" onerror="this.style.display='none'">`;
+            } else {
+                preview.innerHTML = '';
+            }
+        }
+        
+        // СОХРАНИТЬ ОТРЕДАКТИРОВАННЫЙ СЛАЙД
+        function saveEditedSlide() {
+            const id = parseInt(document.getElementById('editSlideId').value);
+            const slideData = {
+                title: document.getElementById('editSlideTitle').value,
+                description: document.getElementById('editSlideDescription').value,
+                order: parseInt(document.getElementById('editSlideOrder').value),
+                status: document.getElementById('editSlideStatus').value,
+                image: document.getElementById('editSlideImage').value,
+                buttonText: document.getElementById('editSlideButtonText').value,
+                buttonLink: document.getElementById('editSlideButtonLink').value
+            };
+            
+            const index = data.slider.findIndex(item => item.id === id);
+            if (index !== -1) {
+                data.slider[index] = { ...data.slider[index], ...slideData };
+                saveData();
+                loadSliderList();
+                showNotification('Слайд обновлён', 'success');
+                setTimeout(() => {
+                    switchTab('slider', 'slider-list');
+                }, 500);
+            }
+        }
+        
+        // ДОБАВИТЬ ЧЕЛОВЕКА (переход на вкладку)
+        function addPerson() {
+            showPage('people');
+            setTimeout(() => {
+                switchTab('people', 'people-add');
+                document.getElementById('personFormTitle').textContent = 'Добавить человека';
+                document.getElementById('personForm').reset();
+                document.getElementById('personId').value = '';
+                document.getElementById('personImagePreview').innerHTML = '';
+            }, 100);
+        }
+        
+        // РЕДАКТИРОВАТЬ ЧЕЛОВЕКА
+        function editPerson(id) {
+            const person = data.people.find(item => item.id === id);
+            if (!person) return;
+            
+            showPage('people');
+            
+            const tabsContainer = document.getElementById('peopleTabs');
+            let editTab = tabsContainer.querySelector('[data-tab="person-edit"]');
+            
+            if (!editTab) {
+                editTab = document.createElement('button');
+                editTab.className = 'tab';
+                editTab.setAttribute('data-tab', 'person-edit');
+                editTab.innerHTML = '<i class="fas fa-edit"></i> Редактировать';
+                tabsContainer.appendChild(editTab);
+                
+                const editContent = document.createElement('div');
+                editContent.className = 'tab-content';
+                editContent.id = 'person-edit';
+                editContent.innerHTML = `
+                    <div class="form-container">
+                        <h2>Редактировать человека</h2>
+                        <form id="personEditForm">
+                            <div class="form-group">
+                                <label for="editPersonName">Имя и фамилия *</label>
+                                <input type="text" id="editPersonName" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="editPersonPosition">Должность *</label>
+                                <input type="text" id="editPersonPosition" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="editPersonDescription">Описание</label>
+                                <textarea id="editPersonDescription" class="form-control" rows="4"></textarea>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="editPersonEmail">Email</label>
+                                    <input type="email" id="editPersonEmail" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="editPersonPhone">Телефон</label>
+                                    <input type="tel" id="editPersonPhone" class="form-control">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="editPersonImage">Фотография (URL)</label>
+                                <input type="text" id="editPersonImage" class="form-control" placeholder="https://example.com/photo.jpg">
+                                <div class="image-preview" id="editPersonImagePreview"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="editPersonStatus">Статус</label>
+                                <select id="editPersonStatus" class="form-control">
+                                    <option value="active">Активен</option>
+                                    <option value="draft">Скрыт</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-outline" onclick="switchTab('people', 'people-list')">Отмена</button>
+                                <button type="button" class="btn btn-primary" onclick="saveEditedPerson()">Сохранить изменения</button>
+                            </div>
+                            
+                            <input type="hidden" id="editPersonId" value="${id}">
+                        </form>
+                    </div>
+                `;
+                document.getElementById('peoplePage').appendChild(editContent);
+                
+                document.getElementById('editPersonImage').addEventListener('input', function() {
+                    const preview = document.getElementById('editPersonImagePreview');
+                    if (this.value) {
+                        preview.innerHTML = `<img src="${this.value}" alt="Предпросмотр" onerror="this.style.display='none'">`;
+                    } else {
+                        preview.innerHTML = '';
+                    }
+                });
+            }
+            
+            setTimeout(() => {
+                switchTab('people', 'person-edit');
+                loadPersonForm(id);
+            }, 100);
+        }
+        
+        // ЗАГРУЗИТЬ ФОРМУ ЧЕЛОВЕКА
+        function loadPersonForm(id) {
+            const person = data.people.find(item => item.id === id);
+            if (!person) return;
+            
+            document.getElementById('editPersonId').value = person.id;
+            document.getElementById('editPersonName').value = person.name;
+            document.getElementById('editPersonPosition').value = person.position;
+            document.getElementById('editPersonDescription').value = person.description || '';
+            document.getElementById('editPersonEmail').value = person.email || '';
+            document.getElementById('editPersonPhone').value = person.phone || '';
+            document.getElementById('editPersonImage').value = person.image || '';
+            document.getElementById('editPersonStatus').value = person.status;
+            
+            const preview = document.getElementById('editPersonImagePreview');
+            if (person.image) {
+                preview.innerHTML = `<img src="${person.image}" alt="Предпросмотр" onerror="this.style.display='none'">`;
+            } else {
+                preview.innerHTML = '';
+            }
+        }
+        
+        // СОХРАНИТЬ ОТРЕДАКТИРОВАННОГО ЧЕЛОВЕКА
+        function saveEditedPerson() {
+            const id = parseInt(document.getElementById('editPersonId').value);
+            const personData = {
+                name: document.getElementById('editPersonName').value,
+                position: document.getElementById('editPersonPosition').value,
+                description: document.getElementById('editPersonDescription').value,
+                email: document.getElementById('editPersonEmail').value,
+                phone: document.getElementById('editPersonPhone').value,
+                image: document.getElementById('editPersonImage').value,
+                status: document.getElementById('editPersonStatus').value
+            };
+            
+            const index = data.people.findIndex(item => item.id === id);
+            if (index !== -1) {
+                data.people[index] = { ...data.people[index], ...personData };
+                saveData();
+                loadPeopleList();
+                showNotification('Данные обновлены', 'success');
+                setTimeout(() => {
+                    switchTab('people', 'people-list');
+                }, 500);
+            }
+        }
+        
+        // ПОСМОТРЕТЬ ЗАЯВКУ
+        function viewApplication(id) {
+            const app = data.applications.find(item => item.id === id);
+            if (!app) return;
+            
+            showPage('applications');
+            
+            const container = document.getElementById('applicationViewContainer');
+            container.innerHTML = `
+                <h2>Заявка от ${app.name}</h2>
+                
+                <div class="form-group">
+                    <label>Тип заявки</label>
+                    <input type="text" class="form-control" value="${app.type}" readonly>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Дата</label>
+                        <input type="text" class="form-control" value="${formatDate(app.date)}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Статус</label>
+                        <input type="text" class="form-control" value="${getStatusText(app.status)}" readonly>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="text" class="form-control" value="${app.email || 'Не указан'}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Телефон</label>
+                        <input type="text" class="form-control" value="${app.phone || 'Не указан'}" readonly>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Сообщение</label>
+                    <textarea class="form-control" rows="6" readonly>${app.message || ''}</textarea>
+                </div>
+                
+                ${app.adminComment ? `
+                    <div class="form-group">
+                        <label>Комментарий администратора</label>
+                        <textarea class="form-control" rows="3" readonly>${app.adminComment}</textarea>
+                    </div>
+                ` : ''}
+                
+                <div class="form-actions">
+                    <button type="button" class="btn btn-outline" onclick="switchTab('applications', 'applications-list')">Назад к списку</button>
+                    <button type="button" class="btn btn-primary" onclick="editApplicationStatus(${app.id})">Изменить статус</button>
+                </div>
+                
+                <input type="hidden" id="viewAppId" value="${app.id}">
+            `;
+            
+            setTimeout(() => {
+                switchTab('applications', 'application-view');
+            }, 100);
+        }
+        
+        // ИЗМЕНИТЬ СТАТУС ЗАЯВКИ
+        function editApplicationStatus(id) {
+            const app = data.applications.find(item => item.id === id);
+            if (!app) return;
+            
+            const container = document.getElementById('applicationViewContainer');
+            container.innerHTML = `
+                <h2>Изменение статуса заявки</h2>
+                
+                <form id="applicationEditForm">
+                    <div class="form-group">
+                        <label>Заявитель</label>
+                        <input type="text" class="form-control" value="${app.name}" readonly>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Тип заявки</label>
+                        <input type="text" class="form-control" value="${app.type}" readonly>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Новый статус</label>
+                        <select class="form-control" id="applicationStatus">
+                            <option value="new" ${app.status === 'new' ? 'selected' : ''}>Новая</option>
+                            <option value="processed" ${app.status === 'processed' ? 'selected' : ''}>В обработке</option>
+                            <option value="completed" ${app.status === 'completed' ? 'selected' : ''}>Завершена</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Комментарий администратора</label>
+                        <textarea class="form-control" id="applicationComment" rows="4" placeholder="Добавьте комментарий...">${app.adminComment || ''}</textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline" onclick="viewApplication(${app.id})">Отмена</button>
+                        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+                    </div>
+                    
+                    <input type="hidden" id="applicationId" value="${app.id}">
+                </form>
+            `;
+            
+            // Добавить обработчик формы
+            document.getElementById('applicationEditForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const appId = parseInt(document.getElementById('applicationId').value);
+                const appIndex = data.applications.findIndex(app => app.id === appId);
+                
+                if (appIndex !== -1) {
+                    data.applications[appIndex].status = document.getElementById('applicationStatus').value;
+                    data.applications[appIndex].adminComment = document.getElementById('applicationComment').value;
+                    saveData();
+                    loadApplicationsList();
+                    showNotification('Статус заявки обновлён', 'success');
+                    setTimeout(() => {
+                        viewApplication(appId);
+                    }, 500);
+                }
+            });
+            
+            setTimeout(() => {
+                switchTab('applications', 'application-view');
+            }, 100);
+        }
+        
+        // УДАЛИТЬ ЭЛЕМЕНТ
+        function deleteItem(type, id) {
+            if (confirm('Вы уверены, что хотите удалить этот элемент?')) {
+                data[type] = data[type].filter(item => item.id !== id);
+                saveData();
+                loadPageData(type);
+                showNotification('Элемент удалён', 'success');
+            }
+        }
+        
+        // ОБРАБОТЧИКИ ФОРМ ДОБАВЛЕНИЯ
+        // Новости
+        document.getElementById('newsForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const newsData = {
+                title: document.getElementById('newsTitle').value,
+                date: document.getElementById('newsDate').value,
+                content: document.getElementById('newsContent').value,
+                image: document.getElementById('newsImage').value,
+                status: document.getElementById('newsStatus').value,
+                category: document.getElementById('newsCategory').value
+            };
+            
+            const newId = data.news.length > 0 ? Math.max(...data.news.map(item => item.id)) + 1 : 1;
+            newsData.id = newId;
+            data.news.push(newsData);
+            
+            saveData();
+            loadNewsList();
+            showNotification('Новость добавлена', 'success');
+            
+            // Очистить форму и вернуться к списку
+            this.reset();
+            document.getElementById('newsImagePreview').innerHTML = '';
+            setTimeout(() => {
+                switchTab('news', 'news-list');
+            }, 500);
+        });
+        
+        // Проекты
+        document.getElementById('projectForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const projectData = {
+                title: document.getElementById('projectTitle').value,
+                city: document.getElementById('projectCity').value,
+                status: document.getElementById('projectStatus').value,
+                startDate: document.getElementById('projectStartDate').value,
+                endDate: document.getElementById('projectEndDate').value,
+                description: document.getElementById('projectDescription').value,
+                image: document.getElementById('projectImage').value
+            };
+            
+            const newId = data.projects.length > 0 ? Math.max(...data.projects.map(item => item.id)) + 1 : 1;
+            projectData.id = newId;
+            data.projects.push(projectData);
+            
+            saveData();
+            loadProjectsList();
+            showNotification('Проект добавлен', 'success');
+            
+            this.reset();
+            document.getElementById('projectImagePreview').innerHTML = '';
+            setTimeout(() => {
+                switchTab('projects', 'projects-list');
+            }, 500);
+        });
+        
+        // Слайды
+        document.getElementById('slideForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const slideData = {
+                title: document.getElementById('slideTitle').value,
+                description: document.getElementById('slideDescription').value,
+                order: parseInt(document.getElementById('slideOrder').value),
+                status: document.getElementById('slideStatus').value,
+                image: document.getElementById('slideImage').value,
+                buttonText: document.getElementById('slideButtonText').value,
+                buttonLink: document.getElementById('slideButtonLink').value
+            };
+            
+            const newId = data.slider.length > 0 ? Math.max(...data.slider.map(item => item.id)) + 1 : 1;
+            slideData.id = newId;
+            data.slider.push(slideData);
+            
+            saveData();
+            loadSliderList();
+            showNotification('Слайд добавлен', 'success');
+            
+            this.reset();
+            document.getElementById('slideImagePreview').innerHTML = '';
+            document.getElementById('slideOrder').value = data.slider.length + 1;
+            setTimeout(() => {
+                switchTab('slider', 'slider-list');
+            }, 500);
+        });
+        
+        // Люди
+        document.getElementById('personForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const personData = {
+                name: document.getElementById('personName').value,
+                position: document.getElementById('personPosition').value,
+                description: document.getElementById('personDescription').value,
+                email: document.getElementById('personEmail').value,
+                phone: document.getElementById('personPhone').value,
+                image: document.getElementById('personImage').value,
+                status: document.getElementById('personStatus').value
+            };
+            
+            const newId = data.people.length > 0 ? Math.max(...data.people.map(item => item.id)) + 1 : 1;
+            personData.id = newId;
+            data.people.push(personData);
+            
+            saveData();
+            loadPeopleList();
+            showNotification('Человек добавлен', 'success');
+            
+            this.reset();
+            document.getElementById('personImagePreview').innerHTML = '';
+            setTimeout(() => {
+                switchTab('people', 'people-list');
+            }, 500);
+        });
+        
+        // ПРЕДПРОСМОТР ИЗОБРАЖЕНИЙ
+        document.getElementById('newsImage')?.addEventListener('input', function() {
+            const preview = document.getElementById('newsImagePreview');
+            if (this.value) {
+                preview.innerHTML = `<img src="${this.value}" alt="Предпросмотр" onerror="this.style.display='none'">`;
+            } else {
+                preview.innerHTML = '';
+            }
+        });
+        
+        document.getElementById('projectImage')?.addEventListener('input', function() {
+            const preview = document.getElementById('projectImagePreview');
+            if (this.value) {
+                preview.innerHTML = `<img src="${this.value}" alt="Предпросмотр" onerror="this.style.display='none'">`;
+            } else {
+                preview.innerHTML = '';
+            }
+        });
+        
+        document.getElementById('slideImage')?.addEventListener('input', function() {
+            const preview = document.getElementById('slideImagePreview');
+            if (this.value) {
+                preview.innerHTML = `<img src="${this.value}" alt="Предпросмотр" onerror="this.style.display='none'">`;
+            } else {
+                preview.innerHTML = '';
+            }
+        });
+        
+        document.getElementById('personImage')?.addEventListener('input', function() {
+            const preview = document.getElementById('personImagePreview');
+            if (this.value) {
+                preview.innerHTML = `<img src="${this.value}" alt="Предпросмотр" onerror="this.style.display='none'">`;
+            } else {
+                preview.innerHTML = '';
+            }
+        });
+        
+        // ИНИЦИАЛИЗАЦИЯ
+        document.addEventListener('DOMContentLoaded', function() {
+            // Сохранить начальные данные
+            saveData();
+            
+            // Загрузить первую страницу (новости)
+            showPage('news');
+            
+            // ПЕРЕКЛЮЧЕНИЕ СТРАНИЦ
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const pageId = this.getAttribute('data-page');
+                    showPage(pageId);
+                    
+                    // Если нажали на ссылку с хэшем (добавить), перейти на вкладку добавления
+                    const hash = this.getAttribute('href');
+                    if (hash && hash.includes('-add')) {
+                        const tabId = hash.substring(1);
+                        setTimeout(() => {
+                            switchTab(pageId, tabId);
+                        }, 100);
+                    }
+                });
+            });
+            
+            // КНОПКИ В ШАПКЕ СТРАНИЦ
+            document.querySelectorAll('.add-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const href = this.getAttribute('href');
+                    if (href) {
+                        const pageId = href.substring(1).split('-')[0];
+                        const tabId = href.substring(1);
+                        showPage(pageId);
+                        setTimeout(() => {
+                            switchTab(pageId, tabId);
+                        }, 100);
+                    }
+                });
+            });
+            
+            // ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    const page = this.closest('.tabs').id.replace('Tabs', '');
+                    switchTab(page, tabId);
+                });
+            });
+            
+            // ФИЛЬТР ЗАЯВОК
+            document.getElementById('filterStatus').addEventListener('change', loadApplicationsList);
+            
+            // Установить сегодняшнюю дату в формах
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('newsDate').value = today;
+        });
+    </script>
+</body>
+</html>
